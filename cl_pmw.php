@@ -29,18 +29,31 @@ if ( is_admin() )
 	include_once CL_PMW_INC_DIR . 'options.php';
 }
 
-register_activation_hook( __FILE__, 'cl_pmw_activate' );
-add_action( 'plugins_loaded', 'cl_pmw_load_text_domain' );
-add_action( 'admin_notices', 'cl_pmw_notify' );
-add_action( 'admin_bar_menu', 'cl_pmw_adminbar', 300 );
-add_action( 'wp_ajax_cl_pmw_get_users', 'cl_pmw_get_users' );
+class CL_PMW
+{
+	function _construct()
+	{
+		register_activation_hook( __FILE__, 'cl_pmw_activate' );
+		add_action( 'plugins_loaded', array($this,'cl_pmw_load_text_domain'));
+		add_action( 'admin_notices', 'cl_pmw_notify' );
+		add_action( 'admin_bar_menu', 'cl_pmw_adminbar', 300 );
+		add_action( 'wp_ajax_cl_pmw_get_users', 'cl_pmw_get_users' );
+	}
+	
+	function cl_pmw_load_text_domain()
+	{
+		load_plugin_textdomain( 'cl_pmw', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+	}
+	
+	public static function init(){
+		return new self;
+	}
+}
 
+CL_PMW::init();
 //Load plugin text domain
  
-function cl_pmw_load_text_domain()
-{
-	load_plugin_textdomain( 'cl_pmw', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
-}
+
 
 //Create table and register an option when activate
 
