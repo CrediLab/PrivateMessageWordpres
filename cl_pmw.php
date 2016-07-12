@@ -19,25 +19,16 @@ define( 'CL_PMW_URL', plugin_dir_url( __FILE__ ) );
 define( 'CL_PMW_CSS_URL', trailingslashit( CL_PMW_URL . 'css' ) );
 define( 'CL_PMW_JS_URL', trailingslashit( CL_PMW_URL . 'js' ) );
 
-
-include_once CL_PMW_INC_DIR . 'inbox-page.php';
-include_once CL_PMW_INC_DIR . 'send-page.php';
-include_once CL_PMW_INC_DIR . 'outbox-page.php';
-
-if ( is_admin() )
-{
-	include_once CL_PMW_INC_DIR . 'options.php';
-}
-
 class CL_PMW
 {
+	
 	function _construct()
 	{
-		register_activation_hook( __FILE__, 'cl_pmw_activate' );
+		register_activation_hook( __FILE__, array($this, 'cl_pmw_activate'));
 		add_action( 'plugins_loaded', array($this,'cl_pmw_load_text_domain'));
-		add_action( 'admin_notices', 'cl_pmw_notify' );
-		add_action( 'admin_bar_menu', 'cl_pmw_adminbar', 300 );
-		add_action( 'wp_ajax_cl_pmw_get_users', 'cl_pmw_get_users' );
+		add_action( 'admin_notices', array($this, 'cl_pmw_notify'));
+		add_action( 'admin_bar_menu', array($this, 'cl_pmw_adminbar', 300));
+		add_action( 'wp_ajax_cl_pmw_get_users', array ($this, 'cl_pmw_get_users'));
 	}
 	
 	function cl_pmw_load_text_domain()
@@ -46,6 +37,15 @@ class CL_PMW
 	}
 	
 	public static function init(){
+		include_once CL_PMW_INC_DIR . 'inbox-page.php';
+		include_once CL_PMW_INC_DIR . 'send-page.php';
+		include_once CL_PMW_INC_DIR . 'outbox-page.php';
+
+		if ( is_admin() )
+		{
+			include_once CL_PMW_INC_DIR . 'options.php';
+		}
+	
 		return new self;
 	}
 	

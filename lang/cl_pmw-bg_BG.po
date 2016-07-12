@@ -1,0 +1,288 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PrivMessages\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-08 23:46+0700\n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.8\n"
+"Last-Translator: \n"
+"Language: bg_BG\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../cl_pmw.php:113 ../cl_pmw.php:142
+msgid "Private Messages Options"
+msgstr "Опции за съобщения"
+
+#: ../cl_pmw.php:113 ../cl_pmw.php:117 ../widget.php:95
+msgid "Private Messages"
+msgstr "Съобщения"
+
+#: ../cl_pmw.php:117
+msgid "Messages"
+msgstr "Съобщения"
+
+#: ../cl_pmw.php:120 ../cl_pmw.php:622
+msgid "Inbox"
+msgstr "Входящи"
+
+#: ../cl_pmw.php:122 ../cl_pmw.php:813
+msgid "Outbox"
+msgstr "Изходящи"
+
+#: ../cl_pmw.php:125 ../cl_pmw.php:297
+msgid "Send Private Message"
+msgstr "Изпрати съобщение"
+
+#: ../cl_pmw.php:125 ../cl_pmw.php:497
+msgid "Send"
+msgstr "Изпрати"
+
+#: ../cl_pmw.php:161
+msgid "Please set numbers of private messages for each user role:"
+msgstr "Задайте брой на съобщенията за всяка потребителска роля:"
+
+#: ../cl_pmw.php:162
+msgid "<b><i>0</i></b> means <b><i>unlimited</i></b>"
+msgstr "<b><i>0</i></b> означава <b><i>неограничени</i></b>"
+
+#: ../cl_pmw.php:163
+msgid "<b><i>-1</i></b> means <b><i>not allowed</i></b> to send PM"
+msgstr ""
+"<b><i>-1</i></b> означава <b><i>непозволено</i></b> изпращане на съобщения"
+
+#: ../cl_pmw.php:169
+msgid "Administrator"
+msgstr "Администратор"
+
+#: ../cl_pmw.php:175
+msgid "Editor"
+msgstr "Редактор"
+
+#: ../cl_pmw.php:179
+msgid "Author"
+msgstr "Автор"
+
+#: ../cl_pmw.php:183
+msgid "Contributor"
+msgstr "Сътрудник"
+
+#: ../cl_pmw.php:189
+msgid "Subscriber"
+msgstr "Абонат"
+
+#: ../cl_pmw.php:194
+msgid "How do you want to choose recipient?"
+msgstr "Как да се избира получател?"
+
+#: ../cl_pmw.php:197
+msgid "Dropdown list"
+msgstr "Падащо меню"
+
+#: ../cl_pmw.php:199
+msgid "Auto suggest from user input"
+msgstr "Автоматично предлагане при въвеждане"
+
+#: ../cl_pmw.php:211
+msgid "Yes"
+msgstr "Да"
+
+#: ../cl_pmw.php:213
+msgid "No"
+msgstr "Не"
+
+#: ../cl_pmw.php:228 ../cl_pmw.php:487 ../cl_pmw.php:656 ../cl_pmw.php:709
+#: ../cl_pmw.php:837 ../cl_pmw.php:873
+msgid "Subject"
+msgstr "Тема"
+
+#: ../cl_pmw.php:234
+msgid "Body"
+msgstr "Съдържание"
+
+#: ../cl_pmw.php:246
+msgid "Blog name"
+msgstr "Име на сайта"
+
+#: ../cl_pmw.php:250
+msgid "Email address of blog"
+msgstr "Email адрес на сайта"
+
+#: ../cl_pmw.php:254
+msgid "Sender name"
+msgstr "Подател"
+
+#: ../cl_pmw.php:258
+msgid "URL of inbox"
+msgstr "URL на входяща поща"
+
+#: ../cl_pmw.php:263
+msgid "Save Changes"
+msgstr "Запази промените"
+
+#: ../cl_pmw.php:334
+msgid "Please enter username of recipient."
+msgstr "Моля, въведете потребителско име на получателя."
+
+#: ../cl_pmw.php:338
+msgid "Please enter subject of message."
+msgstr "Моля, въведете тема на съобщението."
+
+#: ../cl_pmw.php:342
+msgid "Please enter content of message."
+msgstr "Моля, въведете съдържание в съобщението."
+
+#: ../cl_pmw.php:426
+#, php-format
+msgid "%d message sent."
+msgid_plural "%d messages sent."
+msgstr[0] "%d съобщение изпратено."
+msgstr[1] "%d съобщения изпратени."
+
+#: ../cl_pmw.php:426
+#, php-format
+msgid "%d error."
+msgid_plural "%d errors."
+msgstr[0] "%d  грешка."
+msgstr[1] "%d  грешки."
+
+#: ../cl_pmw.php:435 ../cl_pmw.php:836 ../cl_pmw.php:872
+msgid "Recipient"
+msgstr "Получател"
+
+#: ../cl_pmw.php:491
+msgid "Content"
+msgstr "Съдържание"
+
+#: ../cl_pmw.php:526
+msgid "Inbox \\ View Message"
+msgstr "Входящи съобщения"
+
+#: ../cl_pmw.php:528
+msgid "Back to inbox"
+msgstr "Обратно към входящи"
+
+#: ../cl_pmw.php:532 ../cl_pmw.php:553 ../cl_pmw.php:747 ../cl_pmw.php:765
+msgid "Info"
+msgstr "Информация"
+
+#: ../cl_pmw.php:533 ../cl_pmw.php:554 ../cl_pmw.php:748 ../cl_pmw.php:766
+msgid "Message"
+msgstr "Съобщение"
+
+#: ../cl_pmw.php:534 ../cl_pmw.php:555 ../cl_pmw.php:749 ../cl_pmw.php:767
+msgid "Action"
+msgstr "Действие"
+
+#: ../cl_pmw.php:539
+#, php-format
+msgid "<b>Sender</b>: %s<br /><b>Date</b>: %s"
+msgstr "<b>Подател</b>: %s<br /><b>Дата</b>: %s"
+
+#: ../cl_pmw.php:540 ../cl_pmw.php:755
+#, php-format
+msgid "<p><b>Subject</b>: %s</p><p>%s</p>"
+msgstr "<p><b>Тема</b>: %s</p><p>%s</p>"
+
+#: ../cl_pmw.php:543 ../cl_pmw.php:646 ../cl_pmw.php:691 ../cl_pmw.php:758
+#: ../cl_pmw.php:858
+msgid "Delete"
+msgstr "Изтрий"
+
+#: ../cl_pmw.php:546 ../cl_pmw.php:694
+msgid "Reply"
+msgstr "Отговори"
+
+#: ../cl_pmw.php:578
+msgid "Message marked as read."
+msgid_plural "Messages marked as read"
+msgstr[0] "Съобщението е маркирано като прочетено."
+msgstr[1] "Съобщенията са маркирани като прочетени."
+
+#: ../cl_pmw.php:580 ../cl_pmw.php:612 ../cl_pmw.php:803
+msgid "Error. Please try again."
+msgstr "Грешка. Моля, опитайте отново."
+
+#: ../cl_pmw.php:614 ../cl_pmw.php:805
+msgid "Message deleted."
+msgid_plural "Messages deleted."
+msgstr[0] "Съобщението е изтрито."
+msgstr[1] "Съобщенията са изтрити."
+
+#: ../cl_pmw.php:628
+msgid "You have no items in inbox."
+msgstr "Нямате съобщения във входящата си кутия."
+
+#: ../cl_pmw.php:637
+#, php-format
+msgid "You have %d private message (%d unread)."
+msgid_plural "You have %d private messages (%d unread)."
+msgstr[0] "Имате %d лично съобщение (%d непрочетени)."
+msgstr[1] "Имате %d лични съобщения (%d непрочетени)."
+
+#: ../cl_pmw.php:645
+msgid "Bulk Action"
+msgstr "Действия"
+
+#: ../cl_pmw.php:647 ../cl_pmw.php:684
+msgid "Mark As Read"
+msgstr "Маркирай като прочетено"
+
+#: ../cl_pmw.php:648
+msgid "Apply"
+msgstr "Приложи"
+
+#: ../cl_pmw.php:655 ../cl_pmw.php:708
+msgid "Sender"
+msgstr "Подател"
+
+#: ../cl_pmw.php:657 ../cl_pmw.php:710 ../cl_pmw.php:838 ../cl_pmw.php:874
+msgid "Date"
+msgstr "Дата"
+
+#: ../cl_pmw.php:678 ../cl_pmw.php:855
+msgid "View"
+msgstr "Виж"
+
+#: ../cl_pmw.php:741
+msgid "Outbox \\ View Message"
+msgstr "Изходящи съобщения"
+
+#: ../cl_pmw.php:743
+msgid "Back to outbox"
+msgstr "Обратно към изходящи"
+
+#: ../cl_pmw.php:754
+#, php-format
+msgid "<b>Recipient</b>: %s<br /><b>Date</b>: %s"
+msgstr "<b>Получател</b>: %s<br /><b>Дата</b>: %s"
+
+#: ../cl_pmw.php:819
+msgid "You have no items in outbox."
+msgstr "Нямате съобщения в изходящата си кутия."
+
+#: ../cl_pmw.php:822
+#, php-format
+msgid "You wrote %d private message."
+msgid_plural "You wrote %d private messages."
+msgstr[0] "Написали сте %d съобщение."
+msgstr[1] "Написали сте %d съобщения."
+
+#: ../cl_pmw.php:829
+msgid "Delete Selected"
+msgstr "Изтрий избраното"
+
+#: ../cl_pmw.php:904
+#, php-format
+msgid "You have %d new message!"
+msgid_plural "You have %d new messages!"
+msgstr[0] "Имате %d ново съобщение!"
+msgstr[1] "Имате %d нови съобщения!"
+
