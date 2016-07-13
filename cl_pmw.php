@@ -27,7 +27,7 @@ class CL_PMW
 		register_activation_hook( __FILE__, array($this, 'cl_pmw_activate'));
 		add_action( 'plugins_loaded', array($this,'cl_pmw_load_text_domain'));
 		add_action( 'admin_notices', array($this, 'cl_pmw_notify'));
-		add_action( 'admin_bar_menu', array($this, 'cl_pmw_adminbar', 300));
+		add_action( 'admin_bar_menu', array($this, 'cl_pmw_adminbar'), 300);
 		add_action( 'wp_ajax_cl_pmw_get_users', array($this, 'cl_pmw_get_users'));
 	}
 	
