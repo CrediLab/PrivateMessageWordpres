@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: PrivMessages
-Plugin URI: 
+Plugin Name: PrivateMessageWordpress
+Plugin URI: https://github.com/CrediLab/PrivateMessageWordpress
 Description: Allow members to send and receive private messages (PM)
 Version: 
-Author: 
-Author URI:
+Author: CrediLab
+Author URI: https://github.com/CrediLab
 License: 
 */
 
