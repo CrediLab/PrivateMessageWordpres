@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: PrivMessages
-Plugin URI: 
+Plugin Name: PrivateMessageWordpress
+Plugin URI: https://github.com/CrediLab/PrivateMessageWordpress
 Description: Allow members to send and receive private messages (PM)
 Version: 
-Author: 
-Author URI:
+Author: CrediLab
+Author URI: https://github.com/CrediLab
 License: 
 */
 
@@ -22,12 +22,12 @@ define( 'CL_PMW_JS_URL', trailingslashit( CL_PMW_URL . 'js' ) );
 class CL_PMW
 {
 	
-	function _construct()
+	function __construct()
 	{
 		register_activation_hook( __FILE__, array($this, 'cl_pmw_activate'));
 		add_action( 'plugins_loaded', array($this,'cl_pmw_load_text_domain'));
 		add_action( 'admin_notices', array($this, 'cl_pmw_notify'));
-		add_action( 'admin_bar_menu', array($this, 'cl_pmw_adminbar', 300));
+		add_action( 'admin_bar_menu', array($this, 'cl_pmw_adminbar'), 300);
 		add_action( 'wp_ajax_cl_pmw_get_users', array($this, 'cl_pmw_get_users'));
 	}
 	
