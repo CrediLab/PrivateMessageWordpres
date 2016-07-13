@@ -19,6 +19,15 @@ define( 'CL_PMW_URL', plugin_dir_url( __FILE__ ) );
 define( 'CL_PMW_CSS_URL', trailingslashit( CL_PMW_URL . 'css' ) );
 define( 'CL_PMW_JS_URL', trailingslashit( CL_PMW_URL . 'js' ) );
 
+include_once CL_PMW_INC_DIR . 'inbox-page.php';
+include_once CL_PMW_INC_DIR . 'send-page.php';
+include_once CL_PMW_INC_DIR . 'outbox-page.php';
+
+if ( is_admin() )
+	{
+		include_once CL_PMW_INC_DIR . 'options.php';
+	}
+	
 class CL_PMW
 {
 	
@@ -37,15 +46,6 @@ class CL_PMW
 	}
 	
 	public static function init(){
-		include_once CL_PMW_INC_DIR . 'inbox-page.php';
-		include_once CL_PMW_INC_DIR . 'send-page.php';
-		include_once CL_PMW_INC_DIR . 'outbox-page.php';
-
-		if ( is_admin() )
-		{
-			include_once CL_PMW_INC_DIR . 'options.php';
-		}
-	
 		return new self;
 	}
 	
@@ -148,6 +148,51 @@ class CL_PMW
 			}
 		}
 		die( json_encode( $values ) );
+	}
+	
+	public static function inbox_page() 
+	{
+		return self::cl_pmw_inbox();
+	}
+	
+	public static function send_page() 
+	{
+		return self::cl_pmw_send();
+	}
+	
+	public static function outbox_page() 
+	{
+		return self::cl_pmw_outbox();
+	}
+	
+	public static function options_init()
+	{
+		return self::cl_pmw_init();
+	}
+	
+	public static function options_menu()
+	{
+		return self::cl_pmw_add_menu();
+	}
+	
+	public static function styles_inbox()
+	{
+		return self::cl_pmw_admin_print_styles_inbox();
+	}
+	
+	public static function styles_outbox()
+	{
+		return self::cl_pmw_admin_print_styles_outbox();
+	}
+	
+	public static function styles_send()
+	{
+		return self::cl_pmw_admin_print_styles_send();
+	}
+	
+	public static function options_page() 
+	{
+		return self::cl_pmw_option_page();
 	}
 }
 
