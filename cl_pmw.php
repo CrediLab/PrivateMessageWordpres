@@ -22,7 +22,7 @@ define( 'CL_PMW_JS_URL', trailingslashit( CL_PMW_URL . 'js' ) );
 class CL_PMW
 {
 	
-	function _construct()
+	function __construct()
 	{
 		register_activation_hook( __FILE__, array($this, 'cl_pmw_activate'));
 		add_action( 'plugins_loaded', array($this,'cl_pmw_load_text_domain'));
