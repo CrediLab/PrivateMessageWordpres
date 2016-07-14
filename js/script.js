@@ -27,7 +27,7 @@ jQuery( document ).ready( function ( $ )
 		source: function ( request, response )
 		{
 			var data = {
-				action: 'cl_pmw_get_users',
+				action: 'get_users',
 				term  : extract_last( request.term )
 			};
 			$.post( ajaxurl, data, function ( r )
