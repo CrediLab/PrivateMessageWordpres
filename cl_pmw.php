@@ -23,24 +23,88 @@ include_once CL_PMW_INC_DIR . 'inbox-page.php';
 include_once CL_PMW_INC_DIR . 'send-page.php';
 include_once CL_PMW_INC_DIR . 'outbox-page.php';
 
-if ( is_admin() )
+/*if ( is_admin() )
 	{
 		include_once CL_PMW_INC_DIR . 'options.php';
-	}
+	}*/
 	
 class CL_PMW
 {
 	
-	function __construct()
+	public function __construct()
 	{
 		register_activation_hook( __FILE__, array($this, 'cl_pmw_activate'));
 		add_action( 'plugins_loaded', array($this,'cl_pmw_load_text_domain'));
 		add_action( 'admin_notices', array($this, 'cl_pmw_notify'));
 		add_action( 'admin_bar_menu', array($this, 'cl_pmw_adminbar'), 300);
 		add_action( 'wp_ajax_cl_pmw_get_users', array($this, 'cl_pmw_get_users'));
+
+		if(is_admin())
+		{
+			add_action( 'admin_init', array($this, 'cl_pmw_init') );
+			add_action( 'admin_menu', array($this, 'cl_pmw_add_menu') );
+		}
 	}
 	
-	function cl_pmw_load_text_domain()
+	// Add Option page and PM Menu
+ 
+	public function cl_pmw_add_menu()
+	{
+		global $wpdb, $current_user;
+
+		// Get number of unread messages
+		$num_unread = $wpdb->get_var( 'SELECT COUNT(`id`) FROM ' . $wpdb->prefix . 'pm WHERE `recipient` = "' . $current_user->user_login . '" AND `read` = 0 AND `deleted` != "2"' );
+
+		if ( empty( $num_unread ) )
+			$num_unread = 0;
+
+		// Option page
+		add_options_page( __( 'Private Messages Options', 'cl_pmw' ), __( 'Private Messages', 'cl_pmw' ), 'manage_options', 'cl_pmw_option', array($this,'cl_pmw_option_page') );
+
+		// Add Private Messages Menu
+		$icon_url = CL_PMW_URL . 'icon.png';
+		add_menu_page( __( 'Private Messages', 'cl_pmw' ), __( 'Messages', 'cl_pmw' ) . "<span class='update-plugins count-$num_unread'><span class='plugin-count'>$num_unread</span></span>", 'read', 'cl_pmw_inbox', 'cl_pmw_inbox', $icon_url );
+
+		// Inbox page
+		$inbox_page = add_submenu_page( 'cl_pmw_inbox', __( 'Inbox', 'cl_pmw' ), __( 'Inbox', 'cl_pmw' ), 'read', 'cl_pmw_inbox', 'cl_pmw_inbox' );
+		add_action( "admin_print_styles-{$inbox_page}", array($this,'cl_pmw_admin_print_styles_inbox') );
+
+		// Outbox page
+		$outbox_page = add_submenu_page( 'cl_pmw_inbox', __( 'Outbox', 'cl_pmw' ), __( 'Outbox', 'cl_pmw' ), 'read', 'cl_pmw_outbox', 'cl_pmw_outbox' );
+		add_action( "admin_print_styles-{$outbox_page}", array($this,'cl_pmw_admin_print_styles_outbox') );
+
+		// Send page
+		$send_page = add_submenu_page( 'cl_pmw_inbox', __( 'Send Private Message', 'cl_pmw' ), __( 'Send', 'cl_pmw' ), 'read', 'cl_pmw_send', 'cl_pmw_send' );
+		add_action( "admin_print_styles-{$send_page}", array($this,'cl_pmw_admin_print_styles_send') );
+	}
+
+	// Enqueue scripts and styles for send page
+ 
+	public function cl_pmw_admin_print_styles_send()
+	{
+	    wp_enqueue_style( 'jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' );
+		wp_enqueue_style( 'cl_pmw_css', CL_PMW_CSS_URL . 'style.css' );
+		wp_enqueue_script( 'cl_pmw_js', CL_PMW_JS_URL . 'script.js', array( 'jquery-ui-autocomplete' ) );
+
+		do_action( 'cl_pmw_print_styles', 'send' );
+	}
+
+	// Enqueue scripts and styles for outbox page
+ 
+	public function cl_pmw_admin_print_styles_outbox()
+	{
+		do_action( 'cl_pmw_print_styles', 'outbox' );
+	}
+
+	// Enqueue scripts and styles for inbox page
+
+	public function cl_pmw_admin_print_styles_inbox()
+	{
+		do_action( 'cl_pmw_print_styles', 'inbox' );
+	}
+
+
+	public function cl_pmw_load_text_domain()
 	{
 		load_plugin_textdomain( 'cl_pmw', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
@@ -51,7 +115,7 @@ class CL_PMW
 	
 	//Create table and register an option when activate
 
-	function cl_pmw_activate()
+	public function cl_pmw_activate()
 	{
 		global $wpdb;
 
@@ -89,9 +153,15 @@ class CL_PMW
 		add_option( 'cl_pmw_option', $default_option, '', 'no' );
 	}
 
+	// Option page: Change number of PMs for each group
+
+	function cl_pmw_option_page() {
+		//TODO: include templates dir -> options.php
+	}
+
 	// Show notification of new PM
 
-	function cl_pmw_notify()
+	public function cl_pmw_notify()
 	{
 		global $wpdb, $current_user;
 
@@ -111,7 +181,7 @@ class CL_PMW
 
 	//Show number of unread messages in admin bar
 
-	function cl_pmw_adminbar()
+	public function cl_pmw_adminbar()
 	{
 		global $wp_admin_bar;
 		global $wpdb, $current_user;
@@ -132,7 +202,7 @@ class CL_PMW
 
 	// Ajax callback function to get list of users
 
-	function cl_pmw_get_users()
+	public function cl_pmw_get_users()
 	{
 		$keyword = trim( strip_tags( $_POST['term'] ) );
 		$values = array();
@@ -150,50 +220,13 @@ class CL_PMW
 		die( json_encode( $values ) );
 	}
 	
-	public static function inbox_page() 
+	// Register plugin option
+
+	public function function cl_pmw_init()
 	{
-		return self::cl_pmw_inbox();
+		register_setting( 'cl_pmw_option_group', 'cl_pmw_option' );
 	}
-	
-	public static function send_page() 
-	{
-		return self::cl_pmw_send();
-	}
-	
-	public static function outbox_page() 
-	{
-		return self::cl_pmw_outbox();
-	}
-	
-	public static function options_init()
-	{
-		return self::cl_pmw_init();
-	}
-	
-	public static function options_menu()
-	{
-		return self::cl_pmw_add_menu();
-	}
-	
-	public static function styles_inbox()
-	{
-		return self::cl_pmw_admin_print_styles_inbox();
-	}
-	
-	public static function styles_outbox()
-	{
-		return self::cl_pmw_admin_print_styles_outbox();
-	}
-	
-	public static function styles_send()
-	{
-		return self::cl_pmw_admin_print_styles_send();
-	}
-	
-	public static function options_page() 
-	{
-		return self::cl_pmw_option_page();
-	}
+
 }
 
 
