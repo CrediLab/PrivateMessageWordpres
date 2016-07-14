@@ -135,11 +135,6 @@ class cl_pmw
 			'contributor'   => 10,
 			'subscriber'    => 5,
 			'type'          => 'dropdown', // How to choose recipient: dropdown list or autocomplete based on user input
-			'email_enable'  => 1,
-			'email_name'    => '%BLOG_NAME%',
-			'email_address' => '%BLOG_ADDRESS%',
-			'email_subject' => __( 'New PM at %BLOG_NAME%', 'pmw' ),
-			'email_body'    => __( "You have new private message from <b>%SENDER%</b> at <b>%BLOG_NAME%</b>.\n\n<a href=\"%INBOX_URL%\">Click here</a> to go to your inbox.\n\nThis email is sent automatically. Please don't reply.", 'pmw' )
 		);
 		add_option( 'option', $default_option, '', 'no' );
 	}
