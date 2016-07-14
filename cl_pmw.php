@@ -18,7 +18,7 @@ define( 'CL_PMW_URL', plugin_dir_url( __FILE__ ) );
 define( 'CL_PMW_CSS_URL', trailingslashit( CL_PMW_URL . 'css' ) );
 define( 'CL_PMW_JS_URL', trailingslashit( CL_PMW_URL . 'js' ) );
 	
-class pmw
+class cl_pmw
 {
 	
 	public function __construct()
@@ -409,5 +409,5 @@ class pmw
 }
 
 
-pmw::init();
+cl_pmw::init();
 
