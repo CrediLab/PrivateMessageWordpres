@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 
 define( 'CL_PMW_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CL_PMW_INC_DIR', trailingslashit( CL_PMW_DIR . 'inc' ) );
-
+define( 'CL_PMW_TEMPLATES_DIR', trailingslashit( CL_PMW_DIR . 'templates' ) );
 define( 'CL_PMW_URL', plugin_dir_url( __FILE__ ) );
 define( 'CL_PMW_CSS_URL', trailingslashit( CL_PMW_URL . 'css' ) );
 define( 'CL_PMW_JS_URL', trailingslashit( CL_PMW_URL . 'js' ) );
@@ -23,10 +23,6 @@ include_once CL_PMW_INC_DIR . 'inbox-page.php';
 include_once CL_PMW_INC_DIR . 'send-page.php';
 include_once CL_PMW_INC_DIR . 'outbox-page.php';
 
-/*if ( is_admin() )
-	{
-		include_once CL_PMW_INC_DIR . 'options.php';
-	}*/
 	
 class CL_PMW
 {
@@ -156,7 +152,8 @@ class CL_PMW
 	// Option page: Change number of PMs for each group
 
 	function cl_pmw_option_page() {
-		//TODO: include templates dir -> options.php
+		// Include templates dir -> options.php
+		include_once CL_PMW_TEMPLATES_DIR . 'options.php';
 	}
 
 	// Show notification of new PM
@@ -222,7 +219,7 @@ class CL_PMW
 	
 	// Register plugin option
 
-	public function function cl_pmw_init()
+	public function cl_pmw_init()
 	{
 		register_setting( 'cl_pmw_option_group', 'cl_pmw_option' );
 	}
@@ -231,5 +228,4 @@ class CL_PMW
 
 
 CL_PMW::init();
-//Load plugin text domain
- 
+
