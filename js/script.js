@@ -8,7 +8,7 @@ jQuery( document ).ready( function ( $ )
 	 *
 	 * @return array
 	 */
-	function split( val )
+	function my_split( val )
 	{
 		return val.split( /,\s*/ );
 	}
@@ -20,7 +20,7 @@ jQuery( document ).ready( function ( $ )
 	 */
 	function extract_last( term )
 	{
-		return split( term ).pop();
+		return my_split( term ).pop();
 	}
 
 	$( '#recipient' ).autocomplete( {
@@ -37,7 +37,7 @@ jQuery( document ).ready( function ( $ )
 		},
 		select: function ( event, ui )
 		{
-			var terms = split( this.value );
+			var terms = my_split( this.value );
 			terms.pop();
 			terms.push( ui.item.value );
 			terms.push( "" );
