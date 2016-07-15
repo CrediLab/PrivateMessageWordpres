@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h2><?php _e( 'Send Private Message', 'pmw' ); ?></h2>
+    <h2><?php _e( 'Send Private Message', 'cl_pmw' ); ?></h2>
 	<?php
 	$option = get_option( 'option' );
 	if ( $_REQUEST['page'] == 'send' && isset( $_POST['submit'] ) )
@@ -14,7 +14,7 @@
 		if ( ( $option[$role] != 0 ) && ( $total >= $option[$role] ) )
 		{
 			$error = true;
-			$status[] = __( 'You have exceeded the limit of mailbox. Please delete some messages before sending another.', 'pmw' );
+			$status[] = __( 'You have exceeded the limit of mailbox. Please delete some messages before sending another.', 'cl_pmw' );
 		}
 
 		// Get input fields with no html tags and all are escaped
@@ -24,7 +24,7 @@
 		$recipient = array_map( 'strip_tags', $recipient );
 
 		// Allow to filter content
-		$content = apply_filters( 'pmw_content_send', $content );
+		$content = apply_filters( 'cl_pmw_content_send', $content );
 		
 		// Remove slash automatically in wp
 		$subject = stripslashes( $subject );
@@ -44,17 +44,17 @@
 		if ( empty( $recipient ) )
 		{
 			$error = true;
-			$status[] = __( 'Please enter username of recipient.', 'pmw' );
+			$status[] = __( 'Please enter username of recipient.', 'cl_pmw' );
 		}
 		if ( empty( $subject ) )
 		{
 			$error = true;
-			$status[] = __( 'Please enter subject of message.', 'pmw' );
+			$status[] = __( 'Please enter subject of message.', 'cl_pmw' );
 		}
 		if ( empty( $content ) )
 		{
 			$error = true;
-			$status[] = __( 'Please enter content of message.', 'pmw' );
+			$status[] = __( 'Please enter content of message.', 'cl_pmw' );
 		}
 
 		if ( !$error )
@@ -86,18 +86,18 @@
 				}
 			}
 
-			$status[] = sprintf( _n( '%d message sent.', '%d messages sent.', $numOK, 'pmw' ), $numOK ) . ' ' . sprintf( _n( '%d error.', '%d errors.', $numError, 'pmw' ), $numError );
+			$status[] = sprintf( _n( '%d message sent.', '%d messages sent.', $numOK, 'cl_pmw' ), $numOK ) . ' ' . sprintf( _n( '%d error.', '%d errors.', $numError, 'cl_pmw' ), $numError );
 		}
 
 		echo '<div id="message" class="updated fade"><p>', implode( '</p><p>', $status ), '</p></div>';
 	}
 	?>
-	<?php do_action( 'pmw_before_form_send' ); ?>
+	<?php do_action( 'cl_pmw_before_form_send' ); ?>
     <form method="post" action="" id="send-form" enctype="multipart/form-data">
 	    <input type="hidden" name="page" value="send" />
         <table class="form-table">
             <tr>
-                <th><?php _e( 'Recipient', 'pmw' ); ?></th>
+                <th><?php _e( 'Recipient', 'cl_pmw' ); ?></th>
                 <td>
 					<?php
 					// If message is not sent (by errors) or in case of replying, all input is saved
@@ -121,7 +121,7 @@
 
 						$content = '<p>&nbsp;</p>';
 						$content .= '<p>---</p>';
-						$content .= '<p><em>' . __( 'In: ', 'pmw' ) . $msg->date . "\t" . $msg->sender . __( ' Wrote:', 'pmw' ) . '</em></p>';
+						$content .= '<p><em>' . __( 'In: ', 'cl_pmw' ) . $msg->date . "\t" . $msg->sender . __( ' Wrote:', 'cl_pmw' ) . '</em></p>';
 						$content .= wpautop( $msg->content );
 						$content  = stripslashes( $content );
 					}
@@ -140,7 +140,7 @@
 							'order'   => 'ASC',
 							'orderby' => 'display_name' );
 						$values = get_users( $args );
-						$values = apply_filters( 'pmw_recipients', $values );
+						$values = apply_filters( 'cl_pmw_recipients', $values );
 						?>
 						<select name="recipient[]" multiple="multiple" size="5">
 							<?php
@@ -157,16 +157,16 @@
                 </td>
             </tr>
             <tr>
-                <th><?php _e( 'Subject', 'pmw' ); ?></th>
+                <th><?php _e( 'Subject', 'cl_pmw' ); ?></th>
                 <td><input type="text" name="subject" value="<?php echo $subject; ?>" class="large-text" /></td>
             </tr>
             <tr>
-                <th><?php _e( 'Content', 'pmw' ); ?></th>
+                <th><?php _e( 'Content', 'cl_pmw' ); ?></th>
                 <th><?php  wp_editor( $content, 'rw-text-editor', $settings = array( 'textarea_name' => 'content', 'media_buttons' => false ) );?></th>
             </tr>
-	        <?php do_action( 'pmw_form_send' ); ?>
+	        <?php do_action( 'cl_pmw_form_send' ); ?>
         </table>
 	    <p class="submit"><input type="submit" value="Send" class="button-primary" id="submit" name="submit"></p>
     </form>
-	<?php do_action( 'pmw_after_form_send' ); ?>
+	<?php do_action( 'cl_pmw_after_form_send' ); ?>
 </div>

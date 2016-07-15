@@ -153,9 +153,9 @@ class cl_pmw
 
 		printf(
 			'<div id="message" class="error"><p><b>%s</b> <a href="%s">%s</a></p></div>',
-			sprintf( _n( 'You have %d new message!', 'You have %d new messages!', $num_unread, 'pmw' ), $num_unread ),
+			sprintf( _n( 'You have %d new message!', 'You have %d new messages!', $num_unread, 'cl_pmw' ), $num_unread ),
 			admin_url( 'admin.php?page=inbox' ),
-			__( 'Click here to go to inbox', 'pmw' )
+			__( 'Click here to go to inbox', 'cl_pmw' )
 		);
 	}
 
@@ -172,10 +172,10 @@ class cl_pmw
 		if ( $num_unread && is_admin_bar_showing() )
 		{
 			$wp_admin_bar->add_menu( array(
-				'id'    => 'pmw',
-				'title' => sprintf( _n( 'You have %d new message!', 'You have %d new messages!', $num_unread, 'pmw' ), $num_unread ),
+				'id'    => 'cl_pmw',
+				'title' => sprintf( _n( 'You have %d new message!', 'You have %d new messages!', $num_unread, 'cl_pmw' ), $num_unread ),
 				'href'  => admin_url( 'admin.php?page=inbox' ),
-				'meta'  => array( 'class' => "pmw_newmessages" ),
+				'meta'  => array( 'class' => "cl_pmw_newmessages" ),
 			) );
 		}
 	}
@@ -189,7 +189,7 @@ class cl_pmw
 		$args = array( 'search' => '*' . $keyword . '*',
 					   'fields' => 'all_with_meta' );
 		$results_search_users = get_users( $args );
-		$results_search_users = apply_filters( 'pmw_recipients', $results_search_users );
+		$results_search_users = apply_filters( 'cl_pmw_recipients', $results_search_users );
 		if ( !empty( $results_search_users ) )
 		{
 			foreach ( $results_search_users as $result )
@@ -211,7 +211,7 @@ class cl_pmw
 		{
 			$id = $_GET['id'];
 
-			check_admin_referer( "pmw-view_inbox_msg_$id" );
+			check_admin_referer( "cl_pmw-view_inbox_msg_$id" );
 
 			// Mark message as read
 			$wpdb->update( $wpdb->prefix . 'pm', array( 'read' => 1 ), array( 'id' => $id ) );
@@ -233,22 +233,22 @@ class cl_pmw
 
 			if ( !is_array( $id ) )
 			{
-				check_admin_referer( "pmw-mar_inbox_msg_$id" );
+				check_admin_referer( "cl_pmw-mar_inbox_msg_$id" );
 				$id = array( $id );
 			}
 			else
 			{
-				check_admin_referer( "pmw-bulk-action_inbox" );
+				check_admin_referer( "cl_pmw-bulk-action_inbox" );
 			}
 			$n = count( $id );
 			$id = implode( ',', $id );
 			if ( $wpdb->query( 'UPDATE ' . $wpdb->prefix . 'pm SET `read` = "1" WHERE `id` IN (' . $id . ')' ) )
 			{
-				$status = _n( 'Message marked as read.', 'Messages marked as read', $n, 'pmw' );
+				$status = _n( 'Message marked as read.', 'Messages marked as read', $n, 'cl_pmw' );
 			}
 			else
 			{
-				$status = __( 'Error. Please try again.', 'pmw' );
+				$status = __( 'Error. Please try again.', 'cl_pmw' );
 			}
 		}
 
@@ -259,12 +259,12 @@ class cl_pmw
 
 			if ( !is_array( $id ) )
 			{
-				check_admin_referer( "pmw-delete_inbox_msg_$id" );
+				check_admin_referer( "cl_pmw-delete_inbox_msg_$id" );
 				$id = array( $id );
 			}
 			else
 			{
-				check_admin_referer( "pmw-bulk-action_inbox" );
+				check_admin_referer( "cl_pmw-bulk-action_inbox" );
 			}
 
 			$error = false;
@@ -290,11 +290,11 @@ class cl_pmw
 			}
 			if ( $error )
 			{
-				$status = __( 'Error. Please try again.', 'pmw' );
+				$status = __( 'Error. Please try again.', 'cl_pmw' );
 			}
 			else
 			{
-				$status = _n( 'Message deleted.', 'Messages deleted.', count( $id ), 'pmw' );
+				$status = _n( 'Message deleted.', 'Messages deleted.', count( $id ), 'cl_pmw' );
 			}
 		}
 
@@ -315,7 +315,7 @@ class cl_pmw
 		if (isset($_GET['action']) && 'view' == $_GET['action'] && !empty($_GET['id'])) {
 			$id = $_GET['id'];
 
-			check_admin_referer("pmw-view_outbox_msg_$id");
+			check_admin_referer("cl_pmw-view_outbox_msg_$id");
 
 			// Select message information
 			$msg = $wpdb->get_row('SELECT * FROM ' . $wpdb->prefix . 'pm WHERE `id` = "' . $id . '" LIMIT 1');
@@ -332,10 +332,10 @@ class cl_pmw
 			$id = $_GET['id'];
 
 			if (!is_array($id)) {
-				check_admin_referer("pmw-delete_outbox_msg_$id");
+				check_admin_referer("cl_pmw-delete_outbox_msg_$id");
 				$id = array($id);
 			} else {
-				check_admin_referer("pmw-bulk-action_outbox");
+				check_admin_referer("cl_pmw-bulk-action_outbox");
 			}
 			$error = false;
 			foreach ($id as $msg_id) {
@@ -353,9 +353,9 @@ class cl_pmw
 				}
 			}
 			if ($error) {
-				$status = __('Error. Please try again.', 'pmw');
+				$status = __('Error. Please try again.', 'cl_pmw');
 			} else {
-				$status = _n('Message deleted.', 'Messages deleted.', count($id), 'pmw');
+				$status = _n('Message deleted.', 'Messages deleted.', count($id), 'cl_pmw');
 			}
 		}
 
@@ -397,7 +397,7 @@ class cl_pmw
 
 		// Drop PM table and plugin option when uninstall
 		$wpdb->query( "DROP table {$wpdb->prefix}pm" );
-		delete_option( 'pmw_option' );
+		delete_option( 'cl_pmw_option' );
 	}
 	
 
