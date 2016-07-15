@@ -50,22 +50,22 @@ class cl_pmw
 			$num_unread = 0;
 
 		// Option page
-		add_options_page( __( 'Private Messages Options', 'pmw' ), __( 'Private Messages', 'pmw' ), 'manage_options', 'option', array($this,'option_page') );
+		add_options_page( __( 'Private Messages Options', 'cl_pmw' ), __( 'Private Messages', 'cl_pmw' ), 'manage_options', 'option', array($this,'option_page') );
 
 		// Add Private Messages Menu
 		$icon_url = CL_PMW_URL . 'icon.png';
-		add_menu_page( __( 'Private Messages', 'pmw' ), __( 'Messages', 'pmw' ) . "<span class='update-plugins count-$num_unread'><span class='plugin-count'>$num_unread</span></span>", 'read', 'inbox', array( $this, 'inbox'), $icon_url);
+		add_menu_page( __( 'Private Messages', 'cl_pmw' ), __( 'Messages', 'cl_pmw' ) . "<span class='update-plugins count-$num_unread'><span class='plugin-count'>$num_unread</span></span>", 'read', 'inbox', array( $this, 'inbox'), $icon_url);
 
 		// Inbox page
-		$inbox_page = add_submenu_page( 'inbox', __( 'Inbox', 'pmw' ), __( 'Inbox', 'pmw' ), 'read', 'inbox', array( $this, 'inbox') );
+		$inbox_page = add_submenu_page( 'inbox', __( 'Inbox', 'cl_pmw' ), __( 'Inbox', 'cl_pmw' ), 'read', 'inbox', array( $this, 'inbox') );
 		add_action( "admin_print_styles-{$inbox_page}", array($this,'admin_print_styles_inbox') );
 
 		// Outbox page
-		$outbox_page = add_submenu_page( 'inbox', __( 'Outbox', 'pmw' ), __( 'Outbox', 'pmw' ), 'read', 'outbox', array( $this,'outbox') );
+		$outbox_page = add_submenu_page( 'inbox', __( 'Outbox', 'cl_pmw' ), __( 'Outbox', 'cl_pmw' ), 'read', 'outbox', array( $this,'outbox') );
 		add_action( "admin_print_styles-{$outbox_page}", array($this,'admin_print_styles_outbox') );
 
 		// Send page
-		$send_page = add_submenu_page( 'inbox', __( 'Send Private Message', 'pmw' ), __( 'Send', 'pmw' ), 'read', 'send', array( $this,'send') );
+		$send_page = add_submenu_page( 'inbox', __( 'Send Private Message', 'cl_pmw' ), __( 'Send', 'cl_pmw' ), 'read', 'send', array( $this,'send') );
 		add_action( "admin_print_styles-{$send_page}", array($this,'admin_print_styles_send') );
 	}
 
