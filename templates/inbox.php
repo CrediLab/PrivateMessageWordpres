@@ -47,7 +47,7 @@
 					<?php
 					foreach ( $msgs as $msg )
 					{
-						$msg->sender = $wpdb->get_var( "SELECT display_name FROM $wpdb->users WHERE user_login = '$msg->sender'" );
+						$msg->sender = $wpdb->get_var( "SELECT display_name FROM $wpdb->users WHERE ID = '$msg->sender'" );
 						?>
 					<tr>
 						<th class="check-column"><input type="checkbox" name="id[]" value="<?php echo $msg->id; ?>" />

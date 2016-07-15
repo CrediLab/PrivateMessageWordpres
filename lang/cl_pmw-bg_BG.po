@@ -275,11 +275,11 @@ msgstr[1] "%d  грешки."
 
 #: templates/send.php:124
 msgid "In: "
-msgstr "В:"
+msgstr "На: "
 
 #: templates/send.php:124
 msgid " Wrote:"
-msgstr "Написа:"
+msgstr " написа:"
 
 #: templates/send.php:164
 msgid "Content"

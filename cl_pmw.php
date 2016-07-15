@@ -44,7 +44,7 @@ class cl_pmw
 		global $wpdb, $current_user;
 
 		// Get number of unread messages
-		$num_unread = $wpdb->get_var( 'SELECT COUNT(`id`) FROM ' . $wpdb->prefix . 'pm WHERE `recipient` = "' . $current_user->user_login . '" AND `read` = 0 AND `deleted` != "2"' );
+		$num_unread = $wpdb->get_var( 'SELECT COUNT(`id`) FROM ' . $wpdb->prefix . 'pm WHERE `recipient` = "' . $current_user->ID . '" AND `read` = 0 AND `deleted` != "2"' );
 
 		if ( empty( $num_unread ) )
 			$num_unread = 0;
@@ -112,11 +112,11 @@ class cl_pmw
 
 		// Create table
 		$query = 'CREATE TABLE IF NOT EXISTS ' . $wpdb->prefix . 'pm (
-			`id` bigint(20) NOT NULL auto_increment,
+			`id` bigint(20) unsigned NOT NULL auto_increment,
 			`subject` varchar(255) NOT NULL,
 			`content` longtext NOT NULL,
-			`sender` varchar(60) NOT NULL,
-			`recipient` varchar(60) NOT NULL,
+			`sender` bigint(20) unsigned NOT NULL,
+			`recipient` bigint(20) unsigned NOT NULL,
 			`date` datetime NOT NULL,
 			`read` tinyint(1) NOT NULL,
 			`deleted` tinyint(1) NOT NULL,
@@ -146,7 +146,7 @@ class cl_pmw
 		global $wpdb, $current_user;
 
 		// Get number of unread messages
-		$num_unread = (int) $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'pm WHERE `recipient` = "' . $current_user->user_login . '" AND `read` = 0 AND `deleted` != "2"' );
+		$num_unread = (int) $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'pm WHERE `recipient` = "' . $current_user->ID . '" AND `read` = 0 AND `deleted` != "2"' );
 
 		if ( !$num_unread )
 			return;
@@ -167,7 +167,7 @@ class cl_pmw
 		global $wpdb, $current_user;
 
 		// Get number of unread messages
-		$num_unread = (int) $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'pm WHERE `recipient` = "' . $current_user->user_login . '" AND `read` = 0 AND `deleted` != "2"' );
+		$num_unread = (int) $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'pm WHERE `recipient` = "' . $current_user->ID . '" AND `read` = 0 AND `deleted` != "2"' );
 
 		if ( $num_unread && is_admin_bar_showing() )
 		{
@@ -215,10 +215,10 @@ class cl_pmw
 
 			// Mark message as read
 			$wpdb->update( $wpdb->prefix . 'pm', array( 'read' => 1 ), array( 'id' => $id ) );
-
+			
 			// Select message information
 			$msg = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'pm WHERE `id` = "' . $id . '" LIMIT 1' );
-			$msg->sender = $wpdb->get_var( "SELECT display_name FROM $wpdb->users WHERE user_login = '$msg->sender'" );
+			$msg->sender = $wpdb->get_var( "SELECT display_name FROM $wpdb->users WHERE ID = '$msg->sender'" );
 			
 			include_once CL_PMW_TEMPLATES_DIR . 'inboxmessage.php';
 			
@@ -299,7 +299,7 @@ class cl_pmw
 		}
 
 		// Show all messages which have not been deleted by this user (deleted status != 2)
-		$msgs = $wpdb->get_results( 'SELECT `id`, `sender`, `subject`, `read`, `date` FROM ' . $wpdb->prefix . 'pm WHERE `recipient` = "' . $current_user->user_login . '" AND `deleted` != "2" ORDER BY `date` DESC' );
+		$msgs = $wpdb->get_results( 'SELECT `id`, `sender`, `subject`, `read`, `date` FROM ' . $wpdb->prefix . 'pm WHERE `recipient` = "' . $current_user->ID . '" AND `deleted` != "2" ORDER BY `date` DESC' );
 	
 		include_once CL_PMW_TEMPLATES_DIR . 'inbox.php';
 		
@@ -318,8 +318,8 @@ class cl_pmw
 			check_admin_referer("cl_pmw-view_outbox_msg_$id");
 
 			// Select message information
-			$msg = $wpdb->get_row('SELECT * FROM ' . $wpdb->prefix . 'pm WHERE `id` = "' . $id . '" LIMIT 1');
-			$msg->recipient = $wpdb->get_var("SELECT display_name FROM $wpdb->users WHERE user_login = '$msg->recipient'");
+			$msg = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'pm WHERE `id` = "' . $id . '" LIMIT 1' );
+			$msg->recipient = $wpdb->get_var("SELECT display_name FROM $wpdb->users WHERE ID = '$msg->recipient'");
 		
 			include_once CL_PMW_TEMPLATES_DIR . 'outboxmessage.php';
 	
@@ -360,7 +360,7 @@ class cl_pmw
 		}
 
 		// Show all messages
-		$msgs = $wpdb->get_results('SELECT `id`, `recipient`, `subject`, `date` FROM ' . $wpdb->prefix . 'pm WHERE `sender` = "' . $current_user->user_login . '" AND `deleted` != 1 ORDER BY `date` DESC');
+		$msgs = $wpdb->get_results('SELECT `id`, `recipient`, `subject`, `date` FROM ' . $wpdb->prefix . 'pm WHERE `sender` = "' . $current_user->ID . '" AND `deleted` != 1 ORDER BY `date` DESC');
 		
 		include_once CL_PMW_TEMPLATES_DIR . 'outbox.php';
 	}
@@ -397,10 +397,8 @@ class cl_pmw
 
 		// Drop PM table and plugin option when uninstall
 		$wpdb->query( "DROP table {$wpdb->prefix}pm" );
-		delete_option( 'cl_pmw_option' );
+		delete_option( 'option' );
 	}
-	
-
 }
 
 

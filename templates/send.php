@@ -9,7 +9,7 @@
 
 		// Check if total pm of current user exceeds limit
 		$role = $current_user->roles[0];
-		$sender = $current_user->user_login;
+		$sender = $current_user->ID;
 		$total = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'pm WHERE `sender` = "' . $sender . '" OR `recipient` = "' . $sender . '"' );
 		if ( ( $option[$role] != 0 ) && ( $total >= $option[$role] ) )
 		{
@@ -62,8 +62,8 @@
 			$numOK = $numError = 0;
 			foreach ( $recipient as $rec )
 			{
-				// Get user_login field
-				$rec = $wpdb->get_var( "SELECT user_login FROM $wpdb->users WHERE display_name = '$rec' LIMIT 1" );
+				// Get ID field
+				$rec = $wpdb->get_var( "SELECT ID FROM $wpdb->users WHERE display_name = '$rec' LIMIT 1" );
 				$new_message = array(
 					'id'        => NULL,
 					'subject'   => $subject,

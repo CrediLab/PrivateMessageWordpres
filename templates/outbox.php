@@ -30,7 +30,7 @@
                 <tbody>
                     <?php
                     foreach ($msgs as $msg) {
-                        $msg->recipient = $wpdb->get_var("SELECT display_name FROM $wpdb->users WHERE user_login = '$msg->recipient'");
+                        $msg->recipient = $wpdb->get_var("SELECT display_name FROM $wpdb->users WHERE ID = '$msg->recipient'");
                         ?>
                     <tr>
                         <th class="check-column"><input type="checkbox" name="id[]" value="<?php echo $msg->id; ?>"/>
@@ -38,15 +38,15 @@
                         <td><?php echo $msg->recipient; ?></td>
                         <td>
                             <?php
-                            echo '<a href="', wp_nonce_url("?page=cl_pmw_outbox&action=view&id=$msg->id", 'cl_pmw-view_outbox_msg_' . $msg->id), '">', stripcslashes($msg->subject), '</a>';
+                            echo '<a href="', wp_nonce_url("?page=outbox&action=view&id=$msg->id", 'cl_pmw-view_outbox_msg_' . $msg->id), '">', stripcslashes($msg->subject), '</a>';
                             ?>
                             <div class="row-actions">
 							<span>
-								<a href="<?php echo wp_nonce_url("?page=cl_pmw_outbox&action=view&id=$msg->id", 'cl_pmw-view_outbox_msg_' . $msg->id); ?>"><?php _e('View', 'cl_pmw'); ?></a>
+								<a href="<?php echo wp_nonce_url("?page=outbox&action=view&id=$msg->id", 'cl_pmw-view_outbox_msg_' . $msg->id); ?>"><?php _e('View', 'cl_pmw'); ?></a>
 							</span>
 							<span class="delete">
 								| <a class="delete"
-                                     href="<?php echo wp_nonce_url("?page=cl_pmw_outbox&action=delete&id=$msg->id", 'cl_pmw-delete_outbox_msg_' . $msg->id); ?>"><?php _e('Delete', 'cl_pmw'); ?></a>
+                                     href="<?php echo wp_nonce_url("?page=outbox&action=delete&id=$msg->id", 'cl_pmw-delete_outbox_msg_' . $msg->id); ?>"><?php _e('Delete', 'cl_pmw'); ?></a>
 							</span>
                             </div>
                         </td>
