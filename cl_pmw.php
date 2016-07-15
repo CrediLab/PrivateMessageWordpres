@@ -28,7 +28,7 @@ class cl_pmw
 		add_action( 'admin_notices', array($this, 'notify'));
 		add_action( 'admin_bar_menu', array($this, 'adminbar'), 300);
 		add_action( 'wp_ajax_get_users', array($this, 'get_users'));
-		register_uninstall_hook(__FILE__, array($this, 'uninstall'));
+		register_uninstall_hook(__FILE__, array('cl_pmw', 'uninstall'));
 		
 		if(is_admin())
 		{
@@ -391,7 +391,7 @@ class cl_pmw
 	
 	// Uninstall plugin option
 	
-	function uninstall()
+	public static function uninstall()
 	{
 		global $wpdb;
 
