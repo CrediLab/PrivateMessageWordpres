@@ -97,7 +97,7 @@ class cl_pmw
 
 	public function load_text_domain()
 	{
-		load_plugin_textdomain( 'cl_pmw', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+		load_plugin_textdomain( 'cl_pmw', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 	}
 	
 	public static function init(){
