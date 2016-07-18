@@ -207,7 +207,11 @@ msgstr "Автоматично предлагане при въвеждане"
 msgid "Delete messages older than (days)"
 msgstr "Изтриване на съобщения по-стари от (дни)"
 
-#: templates/options.php:56
+#: templates/options.php:58
+msgid "Shortest time interval for sending a message (seconds)"
+msgstr "Най-кратък интервал за изпращане на съобщения (секунди)"
+
+#: templates/options.php:66
 msgid "Save Changes"
 msgstr "Запази промените"
 
@@ -248,8 +252,11 @@ msgid ""
 "You have exceeded the limit of mailbox. Please delete some messages before "
 "sending another."
 msgstr ""
-"Надвишили сте лимита на пощенската си кутия. Моля, изтрийте някои съобщения "
-"преди да изпратите друго съобщение."
+"Надвишили сте лимита на пощенската си кутия. Моля, изтрийте някои съобщения преди да изпратите друго съобщение."
+
+#: templates/send.php:25
+msgid "You have exceeded the time limit of mailbox. Please wait before sending another message."
+msgstr "Надвишили сте времевия лимит за изпращане ан съобщения. Моля, изчакайте преди да изпратите друго съобщение."
 
 #: templates/send.php:47
 msgid "Please enter username of recipient."
