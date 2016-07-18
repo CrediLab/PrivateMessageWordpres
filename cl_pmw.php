@@ -34,6 +34,7 @@ class cl_pmw
 		{
 			add_action( 'admin_init', array($this, 'add_admin_init') );
 			add_action( 'admin_menu', array($this, 'add_menu') );
+			add_action( 'delete_older_messages', array($this, 'delete_older') );
 		}
 	}
 	
@@ -120,8 +121,10 @@ class cl_pmw
 			`date` datetime NOT NULL,
 			`read` tinyint(1) NOT NULL,
 			`deleted` tinyint(1) NOT NULL,
-			PRIMARY KEY (`id`)
-		) COLLATE utf8_general_ci;';
+			PRIMARY KEY (`id`),
+			KEY `sender`(`sender`),
+			KEY `recipient`(`recipient`)
+			) COLLATE utf8_general_ci;';
 
 		// Note: deleted = 1 if message is deleted by sender, = 2 if it is deleted by recipient
 
@@ -135,8 +138,14 @@ class cl_pmw
 			'contributor'   => 10,
 			'subscriber'    => 5,
 			'type'          => 'dropdown', // How to choose recipient: dropdown list or autocomplete based on user input
+			'expires'		=> 0, // When a message expires (in days)
 		);
 		add_option( 'option', $default_option, '', 'no' );
+		
+		// Schedule cron job event to delete messages older than entered time interval
+		if (! wp_next_scheduled ( 'delete_older_messages' )) {
+			wp_schedule_event(time(), 'daily', 'delete_older_messages');
+		}
 	}
 
 	// Show notification of new PM
@@ -398,6 +407,16 @@ class cl_pmw
 		// Drop PM table and plugin option when uninstall
 		$wpdb->query( "DROP table {$wpdb->prefix}pm" );
 		delete_option( 'option' );
+		wp_clear_scheduled_hook('delete_older_messages');
+	}
+	
+	// Deletes messages older than entered time interval (days)
+	public function delete_older() 
+	{
+		if ( $option['expires'] > 0 )
+				{
+					$wpdb->query('DELETE from ' . $wpdb->prefix . 'pm WHERE `date`<DATE_SUB(NOW(), INTERVAL '. $option['expires'] .' DAY)');
+				}
 	}
 }
 

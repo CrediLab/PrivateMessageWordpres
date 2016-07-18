@@ -49,6 +49,11 @@
 							echo 'checked="checked"'; ?> /><?php _e( 'Auto suggest from user input', 'cl_pmw' ); ?>
 					</td>
 				</tr>
+				<tr>
+					<th><?php _e( 'Delete messages older than (days)', 'cl_pmw' ); ?></th>
+					<td><input type="text" name="option[expires]" value="<?php echo $option['expires']; ?>"/>
+					</td>
+				</tr>
 			</table>
 
 			

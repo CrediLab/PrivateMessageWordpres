@@ -203,6 +203,10 @@ msgstr "Падащо меню"
 msgid "Auto suggest from user input"
 msgstr "Автоматично предлагане при въвеждане"
 
+#: templates/options.php:53
+msgid "Delete messages older than (days)"
+msgstr "Изтриване на съобщения по-стари от (дни)"
+
 #: templates/options.php:56
 msgid "Save Changes"
 msgstr "Запази промените"
