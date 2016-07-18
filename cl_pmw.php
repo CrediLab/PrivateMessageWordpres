@@ -132,11 +132,7 @@ class cl_pmw
 
 		// Default numbers of PM for each group
 		$default_option = array(
-			'administrator' => 0,
-			'editor'        => 50,
-			'author'        => 20,
-			'contributor'   => 10,
-			'subscriber'    => 5,
+			'role' 			=> 50,
 			'type'          => 'dropdown', // How to choose recipient: dropdown list or autocomplete based on user input
 			'expires'		=> 0, // When a message expires (in days)
 			'interval'		=> 0, // Shortest time interval for sending a message

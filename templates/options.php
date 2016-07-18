@@ -15,31 +15,14 @@
 
 			?>
 			<table class="form-table">
-				<tr>
-					<th><?php _e( 'Administrator', 'cl_pmw' ); ?></th>
+				<?php foreach (get_editable_roles() as $role_name => $role_info): ?>
+				<tr>			
+					<th><?php _e($role_name, 'cl_pmw' ); ?></th>				
 					<td>
-						<input type="text" name="option[administrator]" value="<?php echo $option['administrator']; ?>"/>
-					</td>
+						<input type="text" name="option[role]" value="<?php echo $option['role']; ?>"/>
+					</td>	
 				</tr>
-				<tr>
-					<th><?php _e( 'Editor', 'cl_pmw' ); ?></th>
-					<td><input type="text" name="option[editor]" value="<?php echo $option['editor']; ?>"/></td>
-				</tr>
-				<tr>
-					<th><?php _e( 'Author', 'cl_pmw' ); ?></th>
-					<td><input type="text" name="option[author]" value="<?php echo $option['author']; ?>"/></td>
-				</tr>
-				<tr>
-					<th><?php _e( 'Contributor', 'cl_pmw' ); ?></th>
-					<td>
-						<input type="text" name="option[contributor]" value="<?php echo $option['contributor']; ?>"/>
-					</td>
-				</tr>
-				<tr>
-					<th><?php _e( 'Subscriber', 'cl_pmw' ); ?></th>
-					<td><input type="text" name="option[subscriber]" value="<?php echo $option['subscriber']; ?>"/>
-					</td>
-				</tr>
+					<?php endforeach; ?>
 				<tr>
 					<th><?php _e( 'How do you want to choose recipient?', 'cl_pmw' ); ?></th>
 					<td>
