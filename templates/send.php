@@ -16,11 +16,19 @@
 			$error = true;
 			$status[] = __( 'You have exceeded the limit of mailbox. Please delete some messages before sending another.', 'cl_pmw' );
 		}
-
+		
+		// Check if exceeds shortest time interval for sending a message (seconds)
+		$count_exceeded = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'pm WHERE `sender`= "' . $sender . '" AND `date`>(NOW()-INTERVAL '. $option['interval'] .' SECOND)' );
+		if ( ( $option[$role] != 0 ) && ( $count_exceeded > 0 ) )		
+		{		
+			$error = true;
+			$status[] = __( 'You have exceeded the time limit of mailbox. Please wait before sending another message.', 'cl_pmw' );
+		}
+		
 		// Get input fields with no html tags and all are escaped
 		$subject = strip_tags( $_POST['subject'] );
 		$content = $_POST['content'] ;
-		$recipient = $option['type'] == 'autosuggest' ? explode( ',', $_POST['recipient'] ) : $_POST['recipient'];
+		$recipient = $option['type'] == 'autosuggest' ? explode( ',', $_POST['recipient'] ) : $_POST['recipient'];  // Send to multiple users
 		$recipient = array_map( 'strip_tags', $recipient );
 
 		// Allow to filter content
@@ -146,7 +154,7 @@
 							<?php
 							foreach ( $values as $value )
 							{
-								$selected = ( $value->display_name == $recipient ) ? ' selected="selected"' : '';
+								$selected = ( $value->display_name == $recipient ) ? ' selected="selected"' : '';  // Send to multiples users
 								echo "<option value='$value->display_name'$selected>$value->display_name</option>";
 							}
 							?>

@@ -54,6 +54,11 @@
 					<td><input type="text" name="option[expires]" value="<?php echo $option['expires']; ?>"/>
 					</td>
 				</tr>
+				<tr>
+					<th><?php _e( 'Shortest time interval for sending a message (seconds)', 'cl_pmw' ); ?></th>
+					<td><input type="text" name="option[interval]" value="<?php echo $option['interval']; ?>"/>
+					</td>
+				</tr>
 			</table>
 
 			
