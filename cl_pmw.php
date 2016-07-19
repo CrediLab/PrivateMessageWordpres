@@ -20,9 +20,7 @@ define( 'CL_PMW_JS_URL', trailingslashit( CL_PMW_URL . 'js' ) );
 	
 class cl_pmw
 {
-	
-	public function __construct()
-	{
+	public function __construct() {
 		register_activation_hook( __FILE__, array($this, 'activate'));
 		add_action( 'plugins_loaded', array($this, 'load_text_domain'));
 		add_action( 'admin_notices', array($this, 'notify'));
@@ -39,9 +37,7 @@ class cl_pmw
 	}
 	
 	// Add Option page and PM Menu
- 
-	public function add_menu()
-	{
+	public function add_menu() {
 		global $wpdb, $current_user;
 
 		// Get number of unread messages
@@ -71,9 +67,7 @@ class cl_pmw
 	}
 
 	// Enqueue scripts and styles for send page
- 
-	public function admin_print_styles_send()
-	{
+	public function admin_print_styles_send() {
 	    wp_enqueue_style( 'jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' );
 		wp_enqueue_style( 'pmw_css', CL_PMW_CSS_URL . 'style.css' );
 		wp_enqueue_script( 'pmw_js', CL_PMW_JS_URL . 'script.js', array( 'jquery-ui-autocomplete' ) );
@@ -82,33 +76,25 @@ class cl_pmw
 	}
 
 	// Enqueue scripts and styles for outbox page
- 
-	public function admin_print_styles_outbox()
-	{
+	public function admin_print_styles_outbox() {
 		do_action( 'print_styles', 'outbox' );
 	}
 
 	// Enqueue scripts and styles for inbox page
-
-	public function admin_print_styles_inbox()
-	{
+	public function admin_print_styles_inbox() {
 		do_action( 'print_styles', 'inbox' );
 	}
 
-
-	public function load_text_domain()
-	{
+	public function load_text_domain() {
 		load_plugin_textdomain( 'cl_pmw', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 	}
 	
-	public static function init(){
+	public static function init() {
 		return new self;
 	}
 	
 	//Create table and register an option when activate
-
-	public function activate()
-	{
+	public function activate() {
 		global $wpdb;
 
 		// Create table
@@ -127,15 +113,14 @@ class cl_pmw
 			) COLLATE utf8_general_ci;';
 
 		// Note: deleted = 1 if message is deleted by sender, = 2 if it is deleted by recipient
-
 		$wpdb->query( $query );
 
 		// Default numbers of PM for each group
 		$default_option = array(
-			'role' 			=> 50,
+			'role_'.$role_name	=> 50,
 			'type'          => 'dropdown', // How to choose recipient: dropdown list or autocomplete based on user input
 			'expires'		=> 0, // When a message expires (in days)
-			'interval'		=> 0, // Shortest time interval for sending a message
+			'interval'		=> 90, // Shortest time interval for sending a message (in seconds)
 		);
 		add_option( 'option', $default_option, '', 'no' );
 		
@@ -146,9 +131,7 @@ class cl_pmw
 	}
 
 	// Show notification of new PM
-
-	public function notify()
-	{
+	public function notify() {
 		global $wpdb, $current_user;
 
 		// Get number of unread messages
@@ -166,9 +149,7 @@ class cl_pmw
 	}
 
 	//Show number of unread messages in admin bar
-
-	public function adminbar()
-	{
+	public function adminbar() {
 		global $wp_admin_bar;
 		global $wpdb, $current_user;
 
@@ -187,9 +168,7 @@ class cl_pmw
 	}
 
 	// Ajax callback function to get list of users
-
-	public function get_users()
-	{
+	public function get_users() {
 		$keyword = trim( strip_tags( $_POST['term'] ) );
 		$values = array();
 		$args = array( 'search' => '*' . $keyword . '*',
@@ -207,9 +186,7 @@ class cl_pmw
 	}
 	
 	//Inbox page
-	
-	public function inbox()
-	{
+	public function inbox() {
 		global $wpdb, $current_user;
 
 		// If view message
@@ -312,9 +289,7 @@ class cl_pmw
 	}
 	
 	// Outbox page
- 
-	public function outbox()
-	{
+	public function outbox() {
 		global $wpdb, $current_user;
 
 		// If view message
@@ -329,7 +304,7 @@ class cl_pmw
 		
 			include_once CL_PMW_TEMPLATES_DIR . 'outboxmessage.php';
 	
-		 // Doesn't need to do more!
+			// Doesn't need to do more!
 			return;
 		}
 
@@ -372,9 +347,7 @@ class cl_pmw
 	}
 		
 	// Send form page
-
-	public function send()
-	{
+	public function send() {
 		global $wpdb, $current_user;
 		
 		include_once CL_PMW_TEMPLATES_DIR . 'send.php';	
@@ -382,23 +355,18 @@ class cl_pmw
 		
 	
 	// Option page: Change number of PMs for each group
-
 	function option_page() {
 		// Include templates dir -> options.php
 		include_once CL_PMW_TEMPLATES_DIR . 'options.php';
 	}
 	
 	// Register plugin option
-
-	public function add_admin_init()
-	{
+	public function add_admin_init() {
 		register_setting( 'option_group', 'option' );
 	}
 	
 	// Uninstall plugin option
-	
-	public static function uninstall()
-	{
+	public static function uninstall() {
 		global $wpdb;
 
 		// Drop PM table and plugin option when uninstall
@@ -411,12 +379,11 @@ class cl_pmw
 	public function delete_older() 
 	{
 		if ( $option['expires'] > 0 )
-				{
-					$wpdb->query('DELETE from ' . $wpdb->prefix . 'pm WHERE `date`<DATE_SUB(NOW(), INTERVAL '. $option['expires'] .' DAY)');
-				}
+			{
+				$wpdb->query('DELETE from ' . $wpdb->prefix . 'pm WHERE `date`<DATE_SUB(NOW(), INTERVAL '. $option['expires'] .' DAY)');
+			}
 	}
 }
-
 
 cl_pmw::init();
 

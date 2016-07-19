@@ -11,18 +11,18 @@
 			echo '<h3>', __( 'Please set numbers of private messages for each user role:', 'cl_pmw' ), '</h3>';
 			echo '<p>', __( '<b><i>0</i></b> means <b><i>unlimited</i></b>', 'cl_pmw' ), '</p>';
 			echo '<p>', __( '<b><i>-1</i></b> means <b><i>not allowed</i></b> to send PM', 'cl_pmw' ), '</p>';
-
-
 			?>
+
 			<table class="form-table">
 				<?php foreach (get_editable_roles() as $role_name => $role_info): ?>
 				<tr>			
 					<th><?php _e($role_name, 'cl_pmw' ); ?></th>				
 					<td>
-						<input type="text" name="option[role]" value="<?php echo $option['role']; ?>"/>
+						<?php $val = 'role_'.$role_name; ?>
+						<input type="text" name="option['.$val.']" value="<?php echo isset($option[$val]) ? $option[$val] : $default_option[$val]; ?>"/>
 					</td>	
 				</tr>
-					<?php endforeach; ?>
+				<?php endforeach; ?>
 				<tr>
 					<th><?php _e( 'How do you want to choose recipient?', 'cl_pmw' ); ?></th>
 					<td>
@@ -43,8 +43,7 @@
 					</td>
 				</tr>
 			</table>
-
-			
+		
 			<p class="submit">
 				<input type="submit" name="submit" class="button-primary" value="<?php _e( 'Save Changes', 'cl_pmw' ) ?>"/>
 			</p>

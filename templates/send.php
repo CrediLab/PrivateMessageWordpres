@@ -11,16 +11,14 @@
 		$role = $current_user->roles[0];
 		$sender = $current_user->ID;
 		$total = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'pm WHERE `sender` = "' . $sender . '" OR `recipient` = "' . $sender . '"' );
-		if ( ( $option[$role] != 0 ) && ( $total >= $option[$role] ) )
-		{
+		if ( ( $option[$role] != 0 ) && ( $total >= $option[$role] ) ) {
 			$error = true;
 			$status[] = __( 'You have exceeded the limit of mailbox. Please delete some messages before sending another.', 'cl_pmw' );
 		}
 		
 		// Check if exceeds shortest time interval for sending a message (seconds)
 		$count_exceeded = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $wpdb->prefix . 'pm WHERE `sender`= "' . $sender . '" AND `date`>(NOW()-INTERVAL '. $option['interval'] .' SECOND)' );
-		if ( ( $option[$role] != 0 ) && ( $count_exceeded > 0 ) )		
-		{		
+		if ( ( $option[$role] != 0 ) && ( $count_exceeded > 0 ) ) {		
 			$error = true;
 			$status[] = __( 'You have exceeded the time limit of mailbox. Please wait before sending another message.', 'cl_pmw' );
 		}
@@ -49,24 +47,20 @@
 		$recipient = array_filter( $recipient );
 		
 		// Check input fields
-		if ( empty( $recipient ) )
-		{
+		if ( empty( $recipient ) ) {
 			$error = true;
 			$status[] = __( 'Please enter username of recipient.', 'cl_pmw' );
 		}
-		if ( empty( $subject ) )
-		{
+		if ( empty( $subject ) ) {
 			$error = true;
 			$status[] = __( 'Please enter subject of message.', 'cl_pmw' );
 		}
-		if ( empty( $content ) )
-		{
+		if ( empty( $content ) ) {
 			$error = true;
 			$status[] = __( 'Please enter content of message.', 'cl_pmw' );
 		}
 
-		if ( !$error )
-		{
+		if ( !$error ) {
 			$numOK = $numError = 0;
 			foreach ( $recipient as $rec )
 			{
@@ -83,13 +77,11 @@
 					'deleted'   => 0
 				);
 				// Insert into database
-				if ( $wpdb->insert( $wpdb->prefix . 'pm', $new_message, array( '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d' ) ) )
-				{
+				if ( $wpdb->insert( $wpdb->prefix . 'pm', $new_message, array( '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d' ) ) ) {
 					$numOK++;
 					unset( $_REQUEST['recipient'], $_REQUEST['subject'], $_REQUEST['content'] );
 				}
-				else
-				{
+				else {
 					$numError++;
 				}
 			}
@@ -118,12 +110,10 @@
 						: $_REQUEST['subject'] ) : '';
 					$subject = urldecode( $subject );  // for some chars like '?' when reply
 
-					if ( empty( $_GET['id'] ) )
-					{
+					if ( empty( $_GET['id'] ) ) {
 						$content = isset( $_REQUEST['content'] ) ?  $_REQUEST['content']  : '';
 					}
-					else
-					{
+					else {
 						$id = $_GET['id'];
 						$msg = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->prefix . 'pm WHERE `id` = "' . $id . '" LIMIT 1' );
 
@@ -134,15 +124,12 @@
 						$content  = stripslashes( $content );
 					}
 					// If "auto suggest" feature is turned on
-					if ( $option['type'] == 'autosuggest' )
-					{
+					if ( $option['type'] == 'autosuggest' ) {
 						?>
                         <input id="recipient" type="text" name="recipient" class="large-text" />
 						<?php
-
 					}
-					else // Or if "select recipient from dropdown list" feature is turned on
-					{
+					else { // Or if "select recipient from dropdown list" feature is turned on
 						// Get all users of blog
 						$args = array(
 							'order'   => 'ASC',
@@ -150,10 +137,9 @@
 						$values = get_users( $args );
 						$values = apply_filters( 'cl_pmw_recipients', $values );
 						?>
-						<select name="recipient[]" multiple="multiple" size="5">
+						<select id="allusers" name="recipient[]" multiple="multiple" size="5">
 							<?php
-							foreach ( $values as $value )
-							{
+							foreach ( $values as $value ) {
 								$selected = ( $value->display_name == $recipient ) ? ' selected="selected"' : '';  // Send to multiples users
 								echo "<option value='$value->display_name'$selected>$value->display_name</option>";
 							}

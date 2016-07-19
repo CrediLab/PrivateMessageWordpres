@@ -1,22 +1,17 @@
 <div class="wrap">
 	<h2><?php _e( 'Inbox', 'cl_pmw' ); ?></h2>
 	<?php
-	if ( !empty( $status ) )
-	{
+	if ( !empty( $status ) ) {
 		echo '<div id="message" class="updated fade"><p>', $status, '</p></div>';
 	}
-	if ( empty( $msgs ) )
-	{
+	if ( empty( $msgs ) ) {
 		echo '<p>', __( 'You have no items in inbox.', 'cl_pmw' ), '</p>';
 	}
-	else
-	{
+	else {
 		$n = count( $msgs );
 		$num_unread = 0;
-		foreach ( $msgs as $msg )
-		{
-			if ( !( $msg->read ) )
-			{
+		foreach ( $msgs as $msg ) {
+			if ( !( $msg->read ) ) {
 				$num_unread++;
 			}
 		}
@@ -45,8 +40,7 @@
 				</thead>
 				<tbody>
 					<?php
-					foreach ( $msgs as $msg )
-					{
+					foreach ( $msgs as $msg ) {
 						$msg->sender = $wpdb->get_var( "SELECT display_name FROM $wpdb->users WHERE ID = '$msg->sender'" );
 						?>
 					<tr>
@@ -55,12 +49,10 @@
 						<td><?php echo $msg->sender; ?></td>
 						<td>
 							<?php
-							if ( $msg->read )
-							{
+							if ( $msg->read ) {
 								echo '<a href="', wp_nonce_url( "?page=inbox&action=view&id=$msg->id", 'cl_pmw-view_inbox_msg_' . $msg->id ), '">', stripcslashes( $msg->subject ), '</a>';
 							}
-							else
-							{
+							else {
 								echo '<a href="', wp_nonce_url( "?page=inbox&action=view&id=$msg->id", 'cl_pmw-view_inbox_msg_' . $msg->id ), '"><b>', stripcslashes( $msg->subject ), '</b></a>';
 							}
 							?>
@@ -69,8 +61,7 @@
 								<a href="<?php echo wp_nonce_url( "?page=inbox&action=view&id=$msg->id", 'cl_pmw-view_inbox_msg_' . $msg->id ); ?>"><?php _e( 'View', 'cl_pmw' ); ?></a>
 							</span>
 								<?php
-								if ( !( $msg->read ) )
-								{
+								if ( !( $msg->read ) ) {
 									?>
 									<span>
 								| <a href="<?php echo wp_nonce_url( "?page=inbox&action=mar&id=$msg->id", 'cl_pmw-mar_inbox_msg_' . $msg->id ); ?>"><?php _e( 'Mark As Read', 'cl_pmw' ); ?></a>
@@ -107,7 +98,6 @@
 			</table>
 		</form>
 		<?php
-
 	}
 	?>
 </div>
