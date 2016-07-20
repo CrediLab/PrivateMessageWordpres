@@ -96,6 +96,21 @@
     <form method="post" action="" id="send-form" enctype="multipart/form-data">
 	    <input type="hidden" name="page" value="send" />
         <table class="form-table">
+			<?php 
+			// Choose user or role for recipient
+			if(is_admin()) { ?>
+			<tr>
+				<th>To</th>
+				<td>
+					<select id="type_recipient">
+						<option value="user" selected="selected">User</option>
+						<option value="role">Role</option>
+					</select>
+				</td>
+			</tr>
+			<?php 
+			}
+			?>
             <tr>
                 <th><?php _e( 'Recipient', 'cl_pmw' ); ?></th>
                 <td>
