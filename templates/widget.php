@@ -30,8 +30,6 @@ class cl_pmw_widget extends WP_Widget
 
 		$title = apply_filters( 'widget_title', $instance['title'] );
 
-		echo $before_widget;
-
 		if ( $title )
 		{
 			echo $before_title . $title . $after_title;
@@ -79,8 +77,6 @@ class cl_pmw_widget extends WP_Widget
 		}
 
 		echo '<p><a href="', get_bloginfo( 'wpurl' ), '/wp-admin/admin.php?page=inbox">', __( 'Click here to go to inbox', 'cl_pmw' ), ' &raquo;</a></p>';
-
-		echo $after_widget;
 	}
 
 	// Update widget
