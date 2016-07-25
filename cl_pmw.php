@@ -17,6 +17,7 @@ define( 'CL_PMW_TEMPLATES_DIR', trailingslashit( CL_PMW_DIR . 'templates' ) );
 define( 'CL_PMW_URL', plugin_dir_url( __FILE__ ) );
 define( 'CL_PMW_CSS_URL', trailingslashit( CL_PMW_URL . 'css' ) );
 define( 'CL_PMW_JS_URL', trailingslashit( CL_PMW_URL . 'js' ) );
+include_once CL_PMW_TEMPLATES_DIR . 'widget.php';
 	
 class cl_pmw
 {
