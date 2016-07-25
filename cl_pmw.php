@@ -72,17 +72,17 @@ class cl_pmw
 		wp_enqueue_style( 'pmw_css', CL_PMW_CSS_URL . 'style.css' );
 		wp_enqueue_script( 'pmw_js', CL_PMW_JS_URL . 'script.js', array( 'jquery-ui-autocomplete' ) );
 
-		do_action( 'print_styles', 'send' );
+		do_action( 'cl_pmw_print_styles', 'send' );
 	}
 
 	// Enqueue scripts and styles for outbox page
 	public function admin_print_styles_outbox() {
-		do_action( 'print_styles', 'outbox' );
+		do_action( 'cl_pmw_print_styles', 'outbox' );
 	}
 
 	// Enqueue scripts and styles for inbox page
 	public function admin_print_styles_inbox() {
-		do_action( 'print_styles', 'inbox' );
+		do_action( 'cl_pmw_print_styles', 'inbox' );
 	}
 
 	public function load_text_domain() {
@@ -117,7 +117,7 @@ class cl_pmw
 
 		// Default numbers of PM for each group
 		$default_option = array(
-			'role_'.$role_name	=> 50,
+			$val			=> 50,
 			'type'          => 'dropdown', // How to choose recipient: dropdown list or autocomplete based on user input
 			'expires'		=> 0, // When a message expires (in days)
 			'interval'		=> 90, // Shortest time interval for sending a message (in seconds)
