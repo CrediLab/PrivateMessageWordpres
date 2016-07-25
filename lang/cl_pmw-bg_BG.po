@@ -79,7 +79,7 @@ msgstr[1] "Съобщенията са изтрити."
 msgid "You have no items in inbox."
 msgstr "Нямате съобщения във входящата си кутия."
 
-#: templates/inbox.php:23
+#: templates/inbox.php:23 templates/widget.php:53
 #, php-format
 msgid "You have %d private message (%d unread)."
 msgid_plural "You have %d private messages (%d unread)."
@@ -315,3 +315,23 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/CrediLab"
 msgstr ""
+
+#: templates/widget.php:14
+msgid "Show notifications and new private messages on sidebar"
+msgstr "Показва известия и нови съобщения в страничната лента"
+
+#: templates/widget.php:16
+msgid "Private Messages Widget"
+msgstr "Уиджет за съобщения"
+
+#: templates/widget.php:74
+msgid "<br />by <b>%s</b><br />at %s"
+msgstr "<br />от <b>%s</b><br />на %s"
+
+#: templates/widget.php:105
+msgid "Title:"
+msgstr "Заглавие:"
+
+#: templates/widget.php:110
+msgid "Number of messages:"
+msgstr "Брой съобщения:"

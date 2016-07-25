@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: PrivateMessageWordpress\n"
-"POT-Creation-Date: 2016-07-15 09:50+0300\n"
-"PO-Revision-Date: 2016-07-15 09:50+0300\n"
+"POT-Creation-Date: 2016-07-25 20:13+0300\n"
+"PO-Revision-Date: 2016-07-25 20:13+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: cl_pmw.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -20,108 +20,108 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: cl_pmw.php:53 templates/options.php:2
+#: cl_pmw.php:51 templates/options.php:2
 msgid "Private Messages Options"
 msgstr ""
 
-#: cl_pmw.php:53 cl_pmw.php:57
+#: cl_pmw.php:51 cl_pmw.php:55 templates/widget.php:101
 msgid "Private Messages"
 msgstr ""
 
-#: cl_pmw.php:57
+#: cl_pmw.php:55
 msgid "Messages"
 msgstr ""
 
-#: cl_pmw.php:60 templates/inbox.php:2
+#: cl_pmw.php:58 templates/inbox.php:2
 msgid "Inbox"
 msgstr ""
 
-#: cl_pmw.php:64 templates/outbox.php:2
+#: cl_pmw.php:62 templates/outbox.php:2
 msgid "Outbox"
 msgstr ""
 
-#: cl_pmw.php:68 templates/send.php:2
+#: cl_pmw.php:66 templates/send.php:2
 msgid "Send Private Message"
 msgstr ""
 
-#: cl_pmw.php:68
+#: cl_pmw.php:66
 msgid "Send"
 msgstr ""
 
-#: cl_pmw.php:157 cl_pmw.php:177
+#: cl_pmw.php:146 cl_pmw.php:164
 #, php-format
 msgid "You have %d new message!"
 msgid_plural "You have %d new messages!"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cl_pmw.php:159
+#: cl_pmw.php:148 templates/widget.php:81
 msgid "Click here to go to inbox"
 msgstr ""
 
-#: cl_pmw.php:248
+#: cl_pmw.php:231
 msgid "Message marked as read."
 msgid_plural "Messages marked as read"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cl_pmw.php:252 cl_pmw.php:294 cl_pmw.php:357
+#: cl_pmw.php:235 cl_pmw.php:277 cl_pmw.php:338
 msgid "Error. Please try again."
 msgstr ""
 
-#: cl_pmw.php:298 cl_pmw.php:359
+#: cl_pmw.php:281 cl_pmw.php:340
 msgid "Message deleted."
 msgid_plural "Messages deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/inbox.php:10
+#: templates/inbox.php:8
 msgid "You have no items in inbox."
 msgstr ""
 
-#: templates/inbox.php:23
+#: templates/inbox.php:18
 #, php-format
 msgid "You have %d private message (%d unread)."
 msgid_plural "You have %d private messages (%d unread)."
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/inbox.php:31
+#: templates/inbox.php:26
 msgid "Bulk Action"
 msgstr ""
 
-#: templates/inbox.php:32 templates/inbox.php:84 templates/inboxmessage.php:20
+#: templates/inbox.php:27 templates/inbox.php:75 templates/inboxmessage.php:20
 #: templates/outbox.php:49 templates/outboxmessage.php:20
 msgid "Delete"
 msgstr ""
 
-#: templates/inbox.php:33 templates/inbox.php:76
+#: templates/inbox.php:28 templates/inbox.php:67
 msgid "Mark As Read"
 msgstr ""
 
-#: templates/inbox.php:34
+#: templates/inbox.php:29
 msgid "Apply"
 msgstr ""
 
-#: templates/inbox.php:41 templates/inbox.php:102
+#: templates/inbox.php:36 templates/inbox.php:93
 msgid "Sender"
 msgstr ""
 
-#: templates/inbox.php:42 templates/inbox.php:103 templates/outbox.php:26
-#: templates/outbox.php:64 templates/send.php:160
+#: templates/inbox.php:37 templates/inbox.php:94 templates/outbox.php:26
+#: templates/outbox.php:64 templates/send.php:169
 msgid "Subject"
 msgstr ""
 
-#: templates/inbox.php:43 templates/inbox.php:104 templates/outbox.php:27
+#: templates/inbox.php:38 templates/inbox.php:95 templates/outbox.php:27
 #: templates/outbox.php:65
 msgid "Date"
 msgstr ""
 
-#: templates/inbox.php:69 templates/outbox.php:45
+#: templates/inbox.php:61 templates/outbox.php:45
 msgid "View"
 msgstr ""
 
-#: templates/inbox.php:88 templates/inboxmessage.php:24
+#: templates/inbox.php:79 templates/inboxmessage.php:24
 msgid "Reply"
 msgstr ""
 
@@ -170,39 +170,27 @@ msgstr ""
 msgid "<b><i>-1</i></b> means <b><i>not allowed</i></b> to send PM"
 msgstr ""
 
-#: templates/options.php:19
-msgid "Administrator"
-msgstr ""
-
-#: templates/options.php:25
-msgid "Editor"
-msgstr ""
-
-#: templates/options.php:29
-msgid "Author"
-msgstr ""
-
-#: templates/options.php:33
-msgid "Contributor"
-msgstr ""
-
-#: templates/options.php:39
-msgid "Subscriber"
-msgstr ""
-
-#: templates/options.php:44
+#: templates/options.php:27
 msgid "How do you want to choose recipient?"
 msgstr ""
 
-#: templates/options.php:47
+#: templates/options.php:30
 msgid "Dropdown list"
 msgstr ""
 
-#: templates/options.php:49
+#: templates/options.php:32
 msgid "Auto suggest from user input"
 msgstr ""
 
-#: templates/options.php:56
+#: templates/options.php:36
+msgid "Delete messages older than (days)"
+msgstr ""
+
+#: templates/options.php:41
+msgid "Shortest time interval for sending a message (seconds)"
+msgstr ""
+
+#: templates/options.php:48
 msgid "Save Changes"
 msgstr ""
 
@@ -221,7 +209,7 @@ msgstr[1] ""
 msgid "Delete Selected"
 msgstr ""
 
-#: templates/outbox.php:25 templates/outbox.php:63 templates/send.php:100
+#: templates/outbox.php:25 templates/outbox.php:63 templates/send.php:115
 msgid "Recipient"
 msgstr ""
 
@@ -238,21 +226,27 @@ msgstr ""
 msgid "<b>Recipient</b>: %s<br /><b>Date</b>: %s"
 msgstr ""
 
-#: templates/send.php:17
+#: templates/send.php:16
 msgid ""
 "You have exceeded the limit of mailbox. Please delete some messages before "
 "sending another."
 msgstr ""
 
-#: templates/send.php:47
-msgid "Please enter username of recipient."
+#: templates/send.php:23
+msgid ""
+"You have exceeded the time limit of mailbox. Please wait before sending "
+"another message."
 msgstr ""
 
 #: templates/send.php:52
+msgid "Please enter username of recipient."
+msgstr ""
+
+#: templates/send.php:56
 msgid "Please enter subject of message."
 msgstr ""
 
-#: templates/send.php:57
+#: templates/send.php:60
 msgid "Please enter content of message."
 msgstr ""
 
@@ -270,16 +264,42 @@ msgid_plural "%d errors."
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/send.php:124
+#: templates/send.php:137
 msgid "In: "
 msgstr ""
 
-#: templates/send.php:124
+#: templates/send.php:137
 msgid " Wrote:"
 msgstr ""
 
-#: templates/send.php:164
+#: templates/send.php:173
 msgid "Content"
+msgstr ""
+
+#: templates/widget.php:14
+msgid "Show notifications and new private messages on sidebar"
+msgstr ""
+
+#: templates/widget.php:16
+msgid "Private Messages Widget"
+msgstr ""
+
+#: templates/widget.php:53
+#, php-format
+msgid "You have %d private message. %d unread."
+msgstr ""
+
+#: templates/widget.php:74
+#, php-format
+msgid "<br />by <b>%s</b><br />at %s"
+msgstr ""
+
+#: templates/widget.php:105
+msgid "Title:"
+msgstr ""
+
+#: templates/widget.php:110
+msgid "Number of PM:"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
