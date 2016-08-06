@@ -104,7 +104,13 @@
 				<td>
 					<select id="type_recipient">
 						<option value="user" selected="selected">User</option>
-						<option value="role">Role</option>
+						<?php 
+							global $wp_roles;
+							$all_roles = $wp_roles->roles;
+							foreach ($all_roles as $role_key => $role_value) {
+								echo "<option value=\"$role_key\">{$role_value['name']}</option>";
+							}
+						?>
 					</select>
 				</td>
 			</tr>
