@@ -102,13 +102,13 @@
 			<tr>
 				<th>To</th>
 				<td>
-					<select id="type_recipient">
+					<select id="type-recipient">
 						<option value="user" selected="selected">User</option>
 						<?php 
 							global $wp_roles;
 							$all_roles = $wp_roles->roles;
 							foreach ($all_roles as $role_key => $role_value) {
-								echo "<option value=\"$role_key\">{$role_value['name']}</option>";
+								echo "<option value=\"role_$role_key\">{$role_value['name']}</option>";
 							}
 						?>
 					</select>
@@ -117,7 +117,7 @@
 			<?php 
 			}
 			?>
-            <tr>
+            <tr id="recipient">
                 <th><?php _e( 'Recipient', 'cl_pmw' ); ?></th>
                 <td>
 					<?php
@@ -185,3 +185,21 @@
     </form>
 	<?php do_action( 'cl_pmw_after_form_send' ); ?>
 </div>
+
+<script type="text/javascript">
+	jQuery( document ).ready( function ( $ )
+{
+	$(document).ready(function(){
+		$("#type-recipient").change(function(){
+			if($(this).val() != 'user')
+			{
+				$("#recipient").hide();
+			}
+			else
+			{
+				$("#recipient").show();
+			}
+		});
+	});
+});
+</script>
