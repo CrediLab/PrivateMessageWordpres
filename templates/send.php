@@ -27,24 +27,32 @@
 		$subject = strip_tags( $_POST['subject'] );
 		$content = $_POST['content'] ;
 		$recipient = $option['type'] == 'autosuggest' ? explode( ',', $_POST['recipient'] ) : $_POST['recipient'];  // Send to multiple users
+		if ( isset( $_POST['recipient']) ) {
 		$recipient = array_map( 'strip_tags', $recipient );
-
+		}
+		
 		// Allow to filter content
 		$content = apply_filters( 'cl_pmw_content_send', $content );
 		
 		// Remove slash automatically in wp
 		$subject = stripslashes( $subject );
 		$content = stripslashes( $content );
+		if (isset( $_POST['recipient']) ) {
 		$recipient = array_map( 'stripslashes', $recipient );
-
+		}
+		
 		// Escape sql
 		$subject = esc_sql( $subject );
 		$content = esc_sql( $content );
+		if (isset( $_POST['recipient']) ) {
 		$recipient = array_map( 'esc_sql', $recipient );
-
+		}
+		
 		// Remove duplicate and empty recipient
+		if (isset( $_POST['recipient']) ) {
 		$recipient = array_unique( $recipient );
 		$recipient = array_filter( $recipient );
+		}
 		
 		// Check input fields
 		if ( empty( $recipient ) ) {
