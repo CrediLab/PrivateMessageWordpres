@@ -59,7 +59,7 @@ class cl_pmw_widget extends WP_Widget
 				foreach ( $msgs as $msg )
 				{
 					$msg->sender = $wpdb->get_var( "SELECT display_name FROM $wpdb->users WHERE ID = '$msg->sender'" );
-					echo '<li>';
+					echo '<li><a href="', wp_nonce_url("wp-admin/admin.php?page=inbox&action=view&id=$msg->id", 'cl_pmw-view_inbox_msg_' . $msg->id), '">';
 					if ( !$msg->read )
 					{
 						echo '<b>';
@@ -70,7 +70,7 @@ class cl_pmw_widget extends WP_Widget
 						echo '</b>';
 					}
 					printf( __( '<br />by <b>%s</b><br />at %s', 'cl_pmw' ), $msg->sender, $msg->date );
-					echo '</li>';
+					echo '</a></li>';
 				}
 				echo '</ol>';
 			}
@@ -105,6 +105,7 @@ class cl_pmw_widget extends WP_Widget
 	<p>
 		<label for="<?php echo $this->get_field_id( 'num_pm' ); ?>"><?php _e( 'Number of messages:', 'cl_pmw' ); ?></label>
 		<input id="<?php echo $this->get_field_id( 'num_pm' ); ?>" name="<?php echo $this->get_field_name( 'num_pm' ); ?>" value="<?php echo $instance['num_pm']; ?>" style="width:100%;" />
+		<b><i>0</i></b> hides <b><i>all messages</i></b>
 	</p>
 	<?php
 
