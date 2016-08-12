@@ -110,19 +110,29 @@
 			<tr>
 				<th>To</th>
 				<td>
-					<select id="type-recipient">
-						<option value="user" selected="selected">User</option>
+					<select name="type-recipient" id="type-recipient">
+						<option value="user">User</option>
 						<?php 
 							global $wp_roles;
 							$all_roles = $wp_roles->roles;
 							foreach ($all_roles as $role_key => $role_value) {
-								echo "<option value=\"role_$role_key\">{$role_value['name']}</option>";
+								echo "<option value=\"$role_key\">{$role_value['name']}</option>";
 							}
 						?>
 					</select>
 				</td>
 			</tr>
 			<?php 
+				// Get IDs of the recipients from selected role
+				$role_recipient = $_POST['type-recipient'];
+				if ( $role_recipient !== 'user' ) {
+					$roleargs = array(
+						'role' => $role_recipient,
+						'fields' => ID
+						);
+					$roleusers = get_users( $roleargs );
+					print_r($roleusers);
+				}
 			}
 			?>
             <tr id="recipient">
