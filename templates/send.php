@@ -131,7 +131,6 @@
 						'fields' => ID
 						);
 					$roleusers = get_users( $roleargs );
-					print_r($roleusers);
 				}
 			}
 			?>
