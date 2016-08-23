@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: PrivateMessageWordpress\n"
-"POT-Creation-Date: 2016-07-25 20:13+0300\n"
-"PO-Revision-Date: 2016-07-25 20:13+0300\n"
+"POT-Creation-Date: 2016-08-22 21:28+0300\n"
+"PO-Revision-Date: 2016-08-22 21:28+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Private Messages Options"
 msgstr ""
 
-#: cl_pmw.php:51 cl_pmw.php:55 templates/widget.php:101
+#: cl_pmw.php:51 cl_pmw.php:55 templates/widget.php:97
 msgid "Private Messages"
 msgstr ""
 
@@ -55,7 +55,7 @@ msgid_plural "You have %d new messages!"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cl_pmw.php:148 templates/widget.php:81
+#: cl_pmw.php:148 templates/widget.php:79
 msgid "Click here to go to inbox"
 msgstr ""
 
@@ -79,7 +79,7 @@ msgstr[1] ""
 msgid "You have no items in inbox."
 msgstr ""
 
-#: templates/inbox.php:18
+#: templates/inbox.php:18 templates/widget.php:51
 #, php-format
 msgid "You have %d private message (%d unread)."
 msgid_plural "You have %d private messages (%d unread)."
@@ -108,7 +108,7 @@ msgid "Sender"
 msgstr ""
 
 #: templates/inbox.php:37 templates/inbox.php:94 templates/outbox.php:26
-#: templates/outbox.php:64 templates/send.php:169
+#: templates/outbox.php:64 templates/send.php:192
 msgid "Subject"
 msgstr ""
 
@@ -209,7 +209,7 @@ msgstr[1] ""
 msgid "Delete Selected"
 msgstr ""
 
-#: templates/outbox.php:25 templates/outbox.php:63 templates/send.php:115
+#: templates/outbox.php:25 templates/outbox.php:63 templates/send.php:138
 msgid "Recipient"
 msgstr ""
 
@@ -238,41 +238,41 @@ msgid ""
 "another message."
 msgstr ""
 
-#: templates/send.php:52
+#: templates/send.php:60
 msgid "Please enter username of recipient."
 msgstr ""
 
-#: templates/send.php:56
+#: templates/send.php:64
 msgid "Please enter subject of message."
 msgstr ""
 
-#: templates/send.php:60
+#: templates/send.php:68
 msgid "Please enter content of message."
 msgstr ""
 
-#: templates/send.php:89
+#: templates/send.php:97
 #, php-format
 msgid "%d message sent."
 msgid_plural "%d messages sent."
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/send.php:89
+#: templates/send.php:97
 #, php-format
 msgid "%d error."
 msgid_plural "%d errors."
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/send.php:137
+#: templates/send.php:160
 msgid "In: "
 msgstr ""
 
-#: templates/send.php:137
+#: templates/send.php:160
 msgid " Wrote:"
 msgstr ""
 
-#: templates/send.php:173
+#: templates/send.php:196
 msgid "Content"
 msgstr ""
 
@@ -284,22 +284,21 @@ msgstr ""
 msgid "Private Messages Widget"
 msgstr ""
 
-#: templates/widget.php:53
-#, php-format
-msgid "You have %d private message. %d unread."
+#: templates/widget.php:51
+msgid "Show/Hide"
 msgstr ""
 
-#: templates/widget.php:74
+#: templates/widget.php:72
 #, php-format
 msgid "<br />by <b>%s</b><br />at %s"
 msgstr ""
 
-#: templates/widget.php:105
+#: templates/widget.php:101
 msgid "Title:"
 msgstr ""
 
-#: templates/widget.php:110
-msgid "Number of PM:"
+#: templates/widget.php:106
+msgid "Number of messages:"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

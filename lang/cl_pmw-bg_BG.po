@@ -284,6 +284,10 @@ msgid_plural "%d errors."
 msgstr[0] "%d  грешка."
 msgstr[1] "%d  грешки."
 
+#: templates/widget.php:51
+msgid "Show/Hide"
+msgstr "Покажи/Скрий"
+
 #: templates/send.php:124
 msgid "In: "
 msgstr "На: "
