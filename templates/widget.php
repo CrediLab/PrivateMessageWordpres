@@ -7,7 +7,6 @@ add_action('widgets_init',
 // Add widget to WP_Widget class
 class cl_pmw_widget extends WP_Widget
 {
-
 	// Constructor
 	public function __construct()
 	{
@@ -20,7 +19,7 @@ class cl_pmw_widget extends WP_Widget
 	function widget( $args, $instance )
 	{
 		global $wpdb, $current_user;
-
+		
 		if ( !is_user_logged_in() )
 		{
 			return;
@@ -48,8 +47,8 @@ class cl_pmw_widget extends WP_Widget
 			$num_unread = 0;
 		}
 
-		echo '<p><b>', sprintf( _n( 'You have %d private message (%d unread).', 'You have %d private messages (%d unread).', $num_pm, 'cl_pmw' ), $num_pm, $num_unread ), '</b></p>';
-
+		echo '<p><b>', sprintf( _n( 'You have %d private message (%d unread).', 'You have %d private messages (%d unread).', $num_pm, 'cl_pmw' ), $num_pm, $num_unread ), '<br><a href="#" id="show_hide">', __('Show/Hide', 'cl_pmw') ,'</a></b></p><div id="widget_messages">';
+		
 		if ( $instance['num_pm'] )
 		{
 			$msgs = $wpdb->get_results( 'SELECT `id`, `sender`, `subject`, `read`, `date` FROM ' . $wpdb->prefix . 'pm WHERE `recipient` = "' . $current_user->ID . '" AND `deleted` != "2" ORDER BY `date` DESC LIMIT ' . $instance['num_pm'] );
@@ -72,13 +71,13 @@ class cl_pmw_widget extends WP_Widget
 					printf( __( '<br />by <b>%s</b><br />at %s', 'cl_pmw' ), $msg->sender, $msg->date );
 					echo '</a></li>';
 				}
-				echo '</ol>';
+				echo '</ol></div>';
 			}
 		}
 
 		echo '<p><a href="', get_bloginfo( 'wpurl' ), '/wp-admin/admin.php?page=inbox">', __( 'Click here to go to inbox', 'cl_pmw' ), ' &raquo;</a></p>';
 	}
-
+	
 	// Update widget
 	function update( $new_instance, $old_instance )
 	{
@@ -111,3 +110,53 @@ class cl_pmw_widget extends WP_Widget
 
 	}
 }
+	?>
+
+
+<script type="text/javascript">
+	// Set and get cookies
+	function setCookie(cname, cvalue, exdays) {
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires="+d.toUTCString();
+		document.cookie = cname + "=" + cvalue + "; " + expires;
+	}
+		
+	function getCookie(cname) {
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length,c.length);
+				}
+			}
+		return "";
+	}
+	
+	jQuery(document).ready(function($){
+	// Adds show/hide messages function to widget using cookies
+	$("#show_hide").click(function () {
+			var closed = $("#widget_messages").is(":hidden");
+			if (closed) {
+				$("#widget_messages").show();
+			}
+			else {
+				$("#widget_messages").hide();
+			}
+
+			setCookie("cl_pmw_widget_state", closed, 30);
+		});
+
+		var openToggle = getCookie("cl_pmw_widget_state");    
+		if (openToggle=="true") {        
+			$("#widget_messages").show();
+		}
+		else {        
+			$("#widget_messages").hide();
+		}
+	});
+</script>
