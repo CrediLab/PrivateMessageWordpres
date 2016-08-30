@@ -112,51 +112,25 @@ class cl_pmw_widget extends WP_Widget
 }
 	?>
 
-
 <script type="text/javascript">
-	// Set and get cookies
-	function setCookie(cname, cvalue, exdays) {
-		var d = new Date();
-		d.setTime(d.getTime() + (exdays*24*60*60*1000));
-		var expires = "expires="+d.toUTCString();
-		document.cookie = cname + "=" + cvalue + "; " + expires;
+jQuery(document).ready(function($){
+	// Adds show/hide messages function to widget using local storage
+	if (localStorage.getItem("widget_state") == "true") {
+		$("#widget_messages").show();
 	}
-		
-	function getCookie(cname) {
-			var name = cname + "=";
-			var ca = document.cookie.split(';');
-			for(var i = 0; i <ca.length; i++) {
-				var c = ca[i];
-				while (c.charAt(0)==' ') {
-					c = c.substring(1);
-				}
-				if (c.indexOf(name) == 0) {
-					return c.substring(name.length,c.length);
-				}
-			}
-		return "";
+	else {
+		$("#widget_messages").hide();
 	}
 	
-	jQuery(document).ready(function($){
-	// Adds show/hide messages function to widget using cookies
 	$("#show_hide").click(function () {
-			var closed = $("#widget_messages").is(":hidden");
-			if (closed) {
-				$("#widget_messages").show();
-			}
-			else {
-				$("#widget_messages").hide();
-			}
-
-			setCookie("cl_pmw_widget_state", closed, 30);
-		});
-
-		var openToggle = getCookie("cl_pmw_widget_state");    
-		if (openToggle=="true") {        
+		if ($("#widget_messages").is(":hidden")) {
 			$("#widget_messages").show();
+			localStorage.setItem("widget_state", true);
 		}
-		else {        
+		else {
 			$("#widget_messages").hide();
+			localStorage.setItem("widget_state", false);
 		}
 	});
+});
 </script>
